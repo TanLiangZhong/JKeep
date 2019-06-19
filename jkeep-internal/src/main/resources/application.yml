@@ -1,1 +1,30 @@
+server:
+  port: 1117
 
+spring:
+  application:
+    name: Jkeep
+
+  # 指定数据源
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/jkeep?autoReconnect=true&useUnicode=true&amp&characterEncoding=UTF-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  #jap 配置
+  jpa:
+    # 数据库
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+    # 是否控制台打印 sql
+    show-sql: true
+    hibernate:
+      #      validate              加载hibernate时，验证创建数据库表结构
+      #      create                每次加载hibernate，重新创建数据库表结构，这就是导致数据库表数据丢失的原因。
+      #      create-drop        加载hibernate时创建，退出是删除表结构
+      #      update               加载hibernate自动更新数据库结构
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      use-new-id-generator-mappings: true

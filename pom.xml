@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>jkeep-jpa</module>
         <module>jkeep-common</module>
-        <module>jkeep-service</module>
         <module>jkeep-internal</module>
+        <module>jkeep-jpa</module>
+        <module>jkeep-service</module>
         <module>jkeep-api</module>
     </modules>
     <parent>
@@ -19,7 +19,7 @@
     <groupId>com.ml</groupId>
     <artifactId>jkeep</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>jkeep</name>
+    <name>JKeep</name>
     <description>JKeep</description>
 
     <properties>
