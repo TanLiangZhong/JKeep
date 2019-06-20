@@ -28,3 +28,8 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       use-new-id-generator-mappings: true
+
+  # thymeleaf 配置
+  thymeleaf:
+    # dev 关闭缓存. OnLine 需改true
+    cache: false
