@@ -8,68 +8,48 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 
-
 /**
- * 用户 - Entity
+ * 菜单 - Entity
  *
- * @author 谭良忠
- * @date 2019/6/19 17:19
+ * @author liangzhong
+ * @date 2019/5/5 21:50
  */
 @Data
 @ToString
 @Entity
-@Table(name = "sys_user",
-        uniqueConstraints = {@UniqueConstraint(name = "userName", columnNames = "username")})
-public class User {
+@Table(name = "sys_menu")
+public class Menu {
 
     @TableGenerator(
             name = "ID_GENERATOR",
             table = "sys_sequence",
             pkColumnName = "seq_name",
-            pkColumnValue = "seq_sys_user",
+            pkColumnValue = "seq_sys_menu",
             valueColumnName = "current_value",
             allocationSize = 20
     )
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "ID_GENERATOR")
     @Id
-    @Column(name = "user_id", length = 20)
-    private Long userId;
+    @Column(name = "id", length = 20)
+    private Long id;
 
     /**
-     * 昵称
+     * 名称
      */
-    @Column(name = "nickname", length = 24)
-    private String nickname;
+    @Column(name = "name")
+    private String name;
 
     /**
-     * 用户名 (登陆名)
+     * 路径
      */
-    @Column(name = "username", length = 24)
-    private String username;
+    @Column(name = "path")
+    private String path;
 
     /**
-     * 密码
+     * 图标
      */
-    @Column(name = "password", length = 64, updatable = false)
-    private String password;
-
-    /**
-     * 邮箱
-     */
-    @Column(name = "email")
-    private String email;
-
-    /**
-     * 手机
-     */
-    @Column(name = "phone", length = 11)
-    private String phone;
-
-    /**
-     * 状态
-     */
-    @Column(name = "status", length = 1)
-    private Byte status;
+    @Column(name = "icon", length = 50)
+    private String icon;
 
     /**
      * 建立时间

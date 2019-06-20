@@ -33,3 +33,14 @@ spring:
   thymeleaf:
     # dev 关闭缓存. OnLine 需改true
     cache: false
+
+# ======= 日志配置 =======
+logging:
+  # 日志路径
+  path: /work/logs
+  file: /work/logs/${spring.application.name}.log
+  # 日志输出级别
+  level:
+    root: info
+    org:
+      springframework: info

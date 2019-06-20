@@ -11,5 +11,24 @@
 
     <artifactId>jkeep-service</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- JKeep Begin -->
+        <dependency>
+            <groupId>com.ml</groupId>
+            <artifactId>jkeep-jpa</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ml</groupId>
+            <artifactId>jkeep-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!-- JKeep End -->
+    </dependencies>
 
 </project>
