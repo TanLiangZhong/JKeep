@@ -21,8 +21,9 @@ import java.io.IOException;
 public class JKeepAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
-    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-        // TODO 无访问权限.
+    public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
+        //  无访问权限. 重定向401页
         log.info("处理访问被拒");
+        response.sendRedirect("/401");
     }
 }

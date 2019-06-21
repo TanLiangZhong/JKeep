@@ -31,25 +31,25 @@ public class UserAuth implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        // TODO
+        // TODO 帐户是否过期
         return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        // TODO
+        // TODO 帐户是否被冻结
         return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        // TODO
+        // TODO 帐户密码是否过期
         return true;
     }
 
     @Override
     public boolean isEnabled() {
-        // TODO
+        // TODO 帐号是否可用
         return true;
     }
 }

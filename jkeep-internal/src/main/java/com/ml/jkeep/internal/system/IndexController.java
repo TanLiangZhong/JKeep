@@ -1,5 +1,6 @@
 package com.ml.jkeep.internal.system;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,13 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author liangzhong
  * @date 2019/6/20 9:43
  */
+@Slf4j
 @Controller
 @RequestMapping
 public class IndexController {
 
     @GetMapping("index")
     public String index() {
-        return "views/system/index";
+        return "views/index";
     }
 
 }

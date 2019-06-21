@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
+import java.io.PrintWriter;
+
 /**
  * 安全认证配置
  *
@@ -45,8 +47,6 @@ public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-//                .anyRequest()
-//                .authenticated()
                 .withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                     @Override
                     public <O extends FilterSecurityInterceptor> O postProcess(O o) {
@@ -79,16 +79,18 @@ public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
                     }
                 })
                 .successHandler((req, resp, auth) -> {
-                    // TODO 登陆成功处理
+                    //  注销成功重定向主页
                     log.info("登陆成功处理 : {}", JSONObject.toJSONString(req.getParameterMap()));
+                    resp.sendRedirect("/index");
                 })
                 .permitAll()
                 .and()
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessHandler((req, resp, authentication) -> {
-                    // TODO 注销成功处理
+                    //  注销成功重定向登录页
                     log.info("注销成功处理 : {}", JSONObject.toJSONString(req.getParameterMap()));
+                    resp.sendRedirect("/login");
                 })
                 .permitAll()
                 .and()
@@ -98,8 +100,8 @@ public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        //解决静态资源被拦截的问题
-        web.ignoring().antMatchers("/*.html", "/css/**", "/img/**", "/js/**");
+        // 忽略请求, 无需鉴权即可访问
+        web.ignoring().antMatchers("/plugins/**", "/css/**", "/img/**", "/js/**", "/api/**", "/404", "/401");
     }
 
 }
