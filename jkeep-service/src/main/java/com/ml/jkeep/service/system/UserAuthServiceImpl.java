@@ -33,7 +33,7 @@ public class UserAuthServiceImpl implements UserDetailsService {
         userAuth.setUsername("jkeep");
         userAuth.setPassword(new BCryptPasswordEncoder().encode("jkeep"));
         Role role = new Role();
-        role.setName("ROLE_ADMIN_A");
+        role.setName("ROLE_ADMIN");
         userAuth.setRoles(Collections.singletonList(role));
         return userAuth;
     }
