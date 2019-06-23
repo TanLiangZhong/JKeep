@@ -1,7 +1,9 @@
 package com.ml.jkeep.internal.auth;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ml.jkeep.service.system.UserAuthServiceImpl;
+import com.ml.jkeep.common.constant.ResultMsg;
+import com.ml.jkeep.common.vo.RestVo;
+import com.ml.jkeep.service.system.impl.UserAuthServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
@@ -15,6 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 
 /**
@@ -57,40 +60,59 @@ public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
                 })
                 .and()
                 .formLogin()
-//                .loginPage("/login")
-//                .loginProcessingUrl("/auth")
+                .loginPage("/login.html")
+                .loginProcessingUrl("/login")
                 .usernameParameter("username").passwordParameter("password")
                 .failureHandler((req, resp, e) -> {
-                    // TODO 登陆失败处理
-                    log.info("登陆失败处理 : {}", JSONObject.toJSONString(req.getParameterMap()));
+                    log.error("登陆失败处理 : {}", JSONObject.toJSONString(req.getParameterMap()));
+                    ResultMsg resultMsg;
                     if (e instanceof BadCredentialsException ||
                             e instanceof UsernameNotFoundException) {
-                        log.info("账户名或者密码输入错误！");
+                        resultMsg = ResultMsg.LOGIN_FAIL_WRONG_PASSWORD;
                     } else if (e instanceof LockedException) {
-                        log.info("账户被锁定，请联系管理员!");
+                        resultMsg = ResultMsg.LOGIN_FAIL_LOCKED;
                     } else if (e instanceof CredentialsExpiredException) {
-                        log.info("密码过期，请联系管理员!");
+                        resultMsg = ResultMsg.LOGIN_FAIL_CREDENTIALS_EXPIRED;
                     } else if (e instanceof AccountExpiredException) {
-                        log.info("账户过期，请联系管理员!");
+                        resultMsg = ResultMsg.LOGIN_FAIL_ACCOUNT_EXPIRED;
                     } else if (e instanceof DisabledException) {
-                        log.info("账户被禁用，请联系管理员!");
+                        resultMsg = ResultMsg.LOGIN_FAIL_DISABLED;
                     } else {
-                        log.info("登录失败，请联系管理员!");
+                        resultMsg = ResultMsg.LOGIN_FAIL;
+                    }
+                    if (req.getHeader("X-CSRF-TOKEN") != null) {
+                        // Ajax 提交
+                        resp.setStatus(HttpServletResponse.SC_OK);
+                        resp.setContentType("application/json;charset=UTF-8");
+                        PrintWriter out = resp.getWriter();
+                        out.write(JSONObject.toJSONString(RestVo.FAIL(resultMsg)));
+                        out.flush();
+                        out.close();
+                    } else {
+                        // 表单提交
+                        resp.sendRedirect("/login.html");
                     }
                 })
                 .successHandler((req, resp, auth) -> {
-                    //  注销成功重定向主页
-                    log.info("登陆成功处理 : {}", JSONObject.toJSONString(req.getParameterMap()));
-                    resp.sendRedirect("/index");
+                    if (req.getHeader("X-CSRF-TOKEN") != null) {
+                        // Ajax 提交
+                        resp.setStatus(HttpServletResponse.SC_OK);
+                        resp.setContentType("application/json;charset=UTF-8");
+                        PrintWriter out = resp.getWriter();
+                        out.write(JSONObject.toJSONString(RestVo.SUCCESS("登录成功")));
+                        out.flush();
+                        out.close();
+                    } else {
+                        // 表单提交
+                        resp.sendRedirect("/index");
+                    }
                 })
-                .permitAll()
                 .and()
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessHandler((req, resp, authentication) -> {
                     //  注销成功重定向登录页
-                    log.info("注销成功处理 : {}", JSONObject.toJSONString(req.getParameterMap()));
-                    resp.sendRedirect("/login");
+                    resp.sendRedirect("/login.html");
                 })
                 .permitAll()
                 .and()
@@ -100,8 +122,9 @@ public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        // 忽略请求, 无需鉴权即可访问
-        web.ignoring().antMatchers("/plugins/**", "/css/**", "/img/**", "/js/**", "/api/**", "/404", "/401");
+        // 忽略请求, 无需鉴权即可访问 ,
+        //                "/api/**", "/login", "/auth", "/error"
+        web.ignoring().antMatchers("/plugins/**", "/css/**", "/img/**", "/js/**", "/favicon.ico");
     }
 
 }

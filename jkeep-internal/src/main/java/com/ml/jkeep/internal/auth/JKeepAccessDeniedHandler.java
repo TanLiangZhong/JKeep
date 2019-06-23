@@ -1,14 +1,17 @@
 package com.ml.jkeep.internal.auth;
 
+import com.alibaba.fastjson.JSONObject;
+import com.ml.jkeep.common.constant.ResultMsg;
+import com.ml.jkeep.common.vo.RestVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * 访问被拒处理
@@ -22,8 +25,19 @@ public class JKeepAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
-        //  无访问权限. 重定向401页
-        log.info("处理访问被拒");
-        response.sendRedirect("/401");
+        // TODO 带优化有Bug , 若 Ajax 请求不传 X-CSRF-TOKEN 当如何？
+        log.info("处理访问被拒 , Parameter：{} , Path: {}", JSONObject.toJSONString(request.getParameterMap()), JSONObject.toJSONString(request.getContextPath()));
+        if (request.getHeader("X-CSRF-TOKEN") != null) {
+            // Ajax 提交
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.setContentType("application/json;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.write(JSONObject.toJSONString(RestVo.FAIL(ResultMsg.ACCESS_DENIED)));
+            out.flush();
+            out.close();
+        } else {
+            // 表单提交 . 重定向401页
+            response.sendRedirect("/401.html");
+        }
     }
 }

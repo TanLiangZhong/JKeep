@@ -1,7 +1,5 @@
-
-
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <title>JKeep-Index</title>
@@ -457,7 +455,10 @@
       <!-- 主体内容 -->
       <div class="layui-body" id="LAY_app_body">
         <div class="layadmin-tabsbody-item layui-show">
-          <iframe src="home/console.html" frameborder="0" class="layadmin-iframe"></iframe>
+          <!--<iframe src="home/console.html" frameborder="0" class="layadmin-iframe"></iframe>
+          <iframe class="layadmin-iframe" width="100%" height="100%" src="/login"
+                  frameborder="0" data-id="userList.html" seamless></iframe>-->
+          <span th:text="${hello}"></span>
         </div>
       </div>
       

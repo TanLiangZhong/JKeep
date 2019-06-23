@@ -13,10 +13,9 @@ public class JKeepWebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-//        TODO 后续添加 Login 静态页面
-//        registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/404").setViewName("/views/error/404");
-        registry.addViewController("/401").setViewName("/views/error/401");
+        registry.addViewController("/login.html").setViewName("/views/system/login");
+        registry.addViewController("/404.html").setViewName("/views/error/404");
+        registry.addViewController("/401.html").setViewName("/views/error/401");
     }
 
 }

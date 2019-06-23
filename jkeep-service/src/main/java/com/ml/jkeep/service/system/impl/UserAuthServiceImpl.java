@@ -1,4 +1,4 @@
-package com.ml.jkeep.service.system;
+package com.ml.jkeep.service.system.impl;
 
 import com.ml.jkeep.jpa.system.entity.Role;
 import com.ml.jkeep.jpa.system.entity.UserAuth;

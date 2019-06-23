@@ -44,3 +44,5 @@ logging:
     root: info
     org:
       springframework: info
+    com:
+      ml: debug
