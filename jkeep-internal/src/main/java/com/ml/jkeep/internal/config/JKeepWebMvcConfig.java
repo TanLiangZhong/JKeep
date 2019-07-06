@@ -1,10 +1,11 @@
-package com.ml.jkeep.internal.auth;
+package com.ml.jkeep.internal.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
+ * Spring Mvc 配置
  * @author liangzhong
  * @date 2019/6/22 0:39
  */
