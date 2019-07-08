@@ -6,6 +6,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * Spring Mvc 配置
+ *
  * @author liangzhong
  * @date 2019/6/22 0:39
  */
