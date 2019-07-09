@@ -1,6 +1,6 @@
 package com.ml.jkeep.service.system;
 
-import com.ml.jkeep.jpa.system.entity.Menu;
+import com.ml.jkeep.jpa.system.entity.sys.Menu;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

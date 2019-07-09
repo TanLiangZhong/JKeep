@@ -1,4 +1,4 @@
-package com.ml.jkeep.jpa.system.entity;
+package com.ml.jkeep.jpa.system.entity.sys;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

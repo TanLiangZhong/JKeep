@@ -1,7 +1,7 @@
 package com.ml.jkeep.service.system.impl;
 
-import com.ml.jkeep.jpa.system.entity.Role;
-import com.ml.jkeep.jpa.system.entity.UserAuth;
+import com.ml.jkeep.jpa.system.entity.sys.Role;
+import com.ml.jkeep.jpa.system.entity.sys.UserAuth;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

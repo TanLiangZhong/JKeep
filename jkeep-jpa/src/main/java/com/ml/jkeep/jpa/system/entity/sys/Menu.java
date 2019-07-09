@@ -1,4 +1,4 @@
-package com.ml.jkeep.jpa.system.entity;
+package com.ml.jkeep.jpa.system.entity.sys;
 
 import lombok.Data;
 import lombok.ToString;
@@ -7,6 +7,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+
+
 
 /**
  * 菜单 - Entity
@@ -20,6 +22,9 @@ import java.util.Date;
 @Table(name = "sys_menu")
 public class Menu {
 
+    /**
+     * 菜单Id
+     */
     @TableGenerator(
             name = "ID_GENERATOR",
             table = "sys_sequence",
@@ -29,9 +34,15 @@ public class Menu {
             allocationSize = 20
     )
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "ID_GENERATOR")
+    @Column(name = "menu_id")
     @Id
-    @Column(name = "id", length = 20)
-    private Long id;
+    private Long menuId;
+
+    /**
+     * 父级主键(顶级为0）
+     */
+    @Column(name = "parent_id")
+    private Long parentId;
 
     /**
      * 名称
@@ -40,46 +51,69 @@ public class Menu {
     private String name;
 
     /**
-     * 路径
+     * 链接
      */
-    @Column(name = "path")
-    private String path;
+    @Column(name = "href")
+    private String href;
 
     /**
      * 图标
      */
-    @Column(name = "icon", length = 50)
+    @Column(name = "icon")
     private String icon;
 
     /**
-     * 建立时间
+     * 唯一编号.
      */
-    @CreationTimestamp
-    @Column(name = "gmt_created", updatable = false)
+    @Column(name = "code")
+    private String code;
+
+    /**
+     * 是否显示(1显示,0不显示)
+     */
+    @Column(name = "show")
+    private Integer show;
+
+    /**
+     * 排序
+     */
+    @Column(name = "order")
+    private Integer order;
+
+    /**
+     * 备注
+     */
+    @Column(name = "remark")
+    private String remark;
+
+    /**
+     * 创建时间
+     */
+    @Column(name = "gmt_created")
     private Date gmtCreated;
 
     /**
-     * 创建者
+     * 创建人
      */
-    @Column(name = "creator", updatable = false, length = 20)
+    @Column(name = "creator")
     private Long creator;
 
     /**
      * 更新时间
      */
-    @UpdateTimestamp
     @Column(name = "gmt_modified")
     private Date gmtModified;
 
     /**
-     * 更新者
+     * 更新人
      */
-    @Column(name = "updater", length = 20)
+    @Column(name = "updater")
     private Long updater;
 
     /**
      * 删除标记
      */
-    @Column(name = "d_flag", length = 1)
-    private Byte dFlag;
+    @Column(name = "d_flag")
+    private Integer dFlag;
+
 }
