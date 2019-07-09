@@ -2,10 +2,10 @@ package com.ml.jkeep.jpa.system.entity.sys;
 
 import lombok.Data;
 import lombok.ToString;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.util.Date;
-
-
 
 
 /**
@@ -82,18 +82,19 @@ public class User {
     /**
      * 创建时间
      */
-    @Column(name = "gmt_created")
+    @Column(name = "gmt_created", updatable = false)
     private Date gmtCreated;
 
     /**
      * 创建人
      */
-    @Column(name = "creator")
+    @Column(name = "creator", updatable = false)
     private Long creator;
 
     /**
      * 更新时间
      */
+    @UpdateTimestamp
     @Column(name = "gmt_modified")
     private Date gmtModified;
 
