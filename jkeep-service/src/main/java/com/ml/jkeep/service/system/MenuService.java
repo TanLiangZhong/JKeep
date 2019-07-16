@@ -1,7 +1,6 @@
 package com.ml.jkeep.service.system;
 
 import com.ml.jkeep.jpa.system.entity.sys.Menu;
-import com.ml.jkeep.jpa.system.entity.Menu;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
