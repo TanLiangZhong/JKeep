@@ -1,7 +1,7 @@
 package com.ml.jkeep.internal.auth;
 
 import com.ml.jkeep.common.constant.Common;
-import com.ml.jkeep.jpa.system.entity.Menu;
+import com.ml.jkeep.jpa.system.entity.sys.Menu;
 import com.ml.jkeep.service.system.MenuService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class JKeepSecurityMetadataSource implements FilterInvocationSecurityMeta
         // TODO 赋予当前 URL 可以访问的角色
         List<Menu> allMenu = menuService.getAllMenu();
         for (Menu menu : allMenu) {
-            if (antPathMatcher.match(menu.getPath(), requestUrl)) {
+            if (antPathMatcher.match(menu.getHref(), requestUrl)) {
                 // TODO
             }
         }
