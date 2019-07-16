@@ -5,6 +5,7 @@
     <title>Login</title>
     <!-- default header name is X-CSRF-TOKEN -->
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
@@ -82,12 +83,13 @@
         form.render();
         //提交
         form.on('submit(LAY-user-login-submit)', function (obj) {
+            const _csrf_header = $("meta[name='_csrf_header']").attr("content");
             const _csrf = $("meta[name='_csrf']").attr("content");
             axios.request({
                 method: 'POST',
                 url: '/login',
                 params: obj.field,
-                headers: {"X-CSRF-TOKEN": _csrf}
+                headers: {[_csrf_header]: _csrf}
             }).then(resp => {
                 console.log(resp);
                 const data = resp.data;
@@ -122,13 +124,6 @@
             //     }
             // });
 
-        });
-
-
-        //实际使用时记得删除该代码
-        layer.msg('为了方便演示，用户名密码可随意输入', {
-            offset: '15px'
-            , icon: 1
         });
 
     });

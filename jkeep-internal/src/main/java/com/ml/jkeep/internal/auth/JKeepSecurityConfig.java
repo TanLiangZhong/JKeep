@@ -1,6 +1,7 @@
 package com.ml.jkeep.internal.auth;
 
 import com.alibaba.fastjson.JSONObject;
+import com.ml.jkeep.common.constant.Common;
 import com.ml.jkeep.common.constant.ResultMsg;
 import com.ml.jkeep.common.vo.RestVo;
 import com.ml.jkeep.service.system.impl.UserAuthServiceImpl;
@@ -60,7 +61,7 @@ public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
                 })
                 .and()
                 .formLogin()
-                .loginPage("/login.html")
+                .loginPage(Common.LOGIN_PAGE_URL)
                 .loginProcessingUrl("/login")
                 .usernameParameter("username").passwordParameter("password")
                 .failureHandler((req, resp, e) -> {
@@ -124,7 +125,7 @@ public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         // 忽略请求, 无需鉴权即可访问 ,
         //                "/api/**", "/login", "/auth", "/error"
-        web.ignoring().antMatchers("/plugins/**", "/css/**", "/img/**", "/js/**", "/favicon.ico");
+        web.ignoring().antMatchers("/plugins/**", "/css/**", "/img/**", "/js/**", "/favicon.ico", "/401.html", "/404.html");
     }
 
 }

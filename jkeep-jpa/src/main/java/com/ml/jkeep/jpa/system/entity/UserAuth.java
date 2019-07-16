@@ -1,5 +1,6 @@
 package com.ml.jkeep.jpa.system.entity;
 
+import com.ml.jkeep.common.constant.Common;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,12 +21,14 @@ public class UserAuth implements UserDetails {
 
     private String username;
     private String password;
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        roles.forEach( role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
+        roles.forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
+        // 默认角色
+        authorities.add(new SimpleGrantedAuthority(Common.DEFAULT_ROLE_NAME));
         return authorities;
     }
 
