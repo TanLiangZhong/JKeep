@@ -1,8 +1,7 @@
-package com.ml.jkeep.jpa.system.entity;
+package com.ml.jkeep.jpa.system.entity.sys;
 
 import lombok.Data;
 import lombok.ToString;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -22,6 +21,9 @@ import java.util.Date;
         uniqueConstraints = {@UniqueConstraint(name = "userName", columnNames = "username")})
 public class User {
 
+    /**
+     * 用户Id
+     */
     @TableGenerator(
             name = "ID_GENERATOR",
             table = "sys_sequence",
@@ -31,26 +33,32 @@ public class User {
             allocationSize = 20
     )
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "ID_GENERATOR")
+    @Column(name = "user_id")
     @Id
-    @Column(name = "user_id", length = 20)
     private Long userId;
+
+    /**
+     * 机构Id
+     */
+    @Column(name = "branch_id")
+    private Integer branchId;
 
     /**
      * 昵称
      */
-    @Column(name = "nickname", length = 24)
+    @Column(name = "nickname")
     private String nickname;
 
     /**
-     * 用户名 (登陆名)
+     * 登录名
      */
-    @Column(name = "username", length = 24)
+    @Column(name = "username")
     private String username;
 
     /**
      * 密码
      */
-    @Column(name = "password", length = 64, updatable = false)
+    @Column(name = "password")
     private String password;
 
     /**
@@ -62,26 +70,25 @@ public class User {
     /**
      * 手机
      */
-    @Column(name = "phone", length = 11)
+    @Column(name = "phone")
     private String phone;
 
     /**
-     * 状态
+     * 状态值
      */
-    @Column(name = "status", length = 1)
-    private Byte status;
+    @Column(name = "status")
+    private Integer status;
 
     /**
-     * 建立时间
+     * 创建时间
      */
-    @CreationTimestamp
     @Column(name = "gmt_created", updatable = false)
     private Date gmtCreated;
 
     /**
-     * 创建者
+     * 创建人
      */
-    @Column(name = "creator", updatable = false, length = 20)
+    @Column(name = "creator", updatable = false)
     private Long creator;
 
     /**
@@ -92,14 +99,15 @@ public class User {
     private Date gmtModified;
 
     /**
-     * 更新者
+     * 更新人
      */
-    @Column(name = "updater", length = 20)
+    @Column(name = "updater")
     private Long updater;
 
     /**
      * 删除标记
      */
-    @Column(name = "d_flag", length = 1)
-    private Byte dFlag;
+    @Column(name = "d_flag")
+    private Integer dFlag;
+
 }

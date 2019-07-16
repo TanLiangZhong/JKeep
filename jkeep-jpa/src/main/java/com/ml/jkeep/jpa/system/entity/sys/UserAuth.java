@@ -1,4 +1,4 @@
-package com.ml.jkeep.jpa.system.entity;
+package com.ml.jkeep.jpa.system.entity.sys;
 
 import com.ml.jkeep.common.constant.Common;
 import lombok.Data;
