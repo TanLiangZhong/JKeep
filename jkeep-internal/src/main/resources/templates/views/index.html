@@ -1,48 +1,54 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-  <meta charset="utf-8">
-  <title>JKeep-Index</title>
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  <link rel="stylesheet" href="/plugins/layuiadmin/layui/css/layui.css" media="all">
-  <link rel="stylesheet" href="/plugins/layuiadmin/style/admin.css" media="all">
+    <meta charset="utf-8">
+    <title>JKeep-Index</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/plugins/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/plugins/layuiadmin/style/admin.css" media="all">
 
 </head>
 <body class="layui-layout-body">
-  
-  <div id="LAY_app">
+
+<div id="LAY_app">
     <div class="layui-layout layui-layout-admin">
 
-      <div th:insert="views/layout/header :: header"></div>
-      <!-- 侧边菜单 -->
-      <div th:insert="views/layout/menu :: menu"></div>
-      <!-- 页面标签 -->
-      <div th:insert="views/layout/tabs :: tabs"></div>
-      <!-- 主体内容 -->
-      <div class="layui-body" id="LAY_app_body">
-        <div class="layadmin-tabsbody-item layui-show">
-          <!--<iframe src="home/console.html" frameborder="0" class="layadmin-iframe"></iframe>
-          <iframe class="layadmin-iframe" width="100%" height="100%" src="/login"
-                  frameborder="0" data-id="userList.html" seamless></iframe>-->
-          <span th:text="${hello}"></span>
-        </div>
-      </div>
-      
-      <!-- 辅助元素，一般用于移动设备下遮罩 -->
-      <div class="layadmin-body-shade" layadmin-event="shade"></div>
-    </div>
-  </div>
+        <div th:insert="views/layout/header :: header"></div>
+        <!-- 侧边菜单 -->
+        <div th:insert="views/layout/menu :: menu"></div>
+        <!-- 页面标签 -->
+        <div th:insert="views/layout/tabs :: tabs"></div>
+        <!-- 主体内容 -->
+        <div class="layui-body" id="LAY_app_body">
+            <div class="layadmin-tabsbody-item layui-show">
+                <!--<iframe src="home/console.html" frameborder="0" class="layadmin-iframe"></iframe>
+                <iframe class="layadmin-iframe" width="100%" height="100%" src="/login"
+                        frameborder="0" data-id="userList.html" seamless></iframe>-->
 
-  <script src="/plugins/layuiadmin/layui/layui.js"></script>
-  <script>
-  layui.config({
-    base: '/plugins/layuiadmin/' //静态资源所在路径
-  }).extend({
-    index: 'lib/index' //主入口模块
-  }).use('index');
-  </script>
+                <span sec:authorize="name">
+                      The value of the "name" property of the authentication object should appear here.
+                </span>
+
+            </div>
+        </div>
+
+        <!-- 辅助元素，一般用于移动设备下遮罩 -->
+        <div class="layadmin-body-shade" layadmin-event="shade"></div>
+    </div>
+</div>
+
+<script src="/plugins/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/plugins/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use('index');
+</script>
 </body>
 </html>
 

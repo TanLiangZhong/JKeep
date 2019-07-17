@@ -1,6 +1,7 @@
 package com.ml.jkeep.internal.system;
 
 import com.ml.jkeep.common.controller.BaseController;
+import com.ml.jkeep.internal.auth.JKeepSecurityContextHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ public class IndexController extends BaseController {
 
     @GetMapping("/")
     public String index() {
+        log.info("User:{}", JKeepSecurityContextHolder.getUserInfo().getUsername());
         return "views/index";
     }
 
