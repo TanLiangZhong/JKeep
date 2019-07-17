@@ -1,8 +1,12 @@
 package com.ml.jkeep.common.service.impl;
 
+import com.ml.jkeep.common.bo.PageBo;
 import com.ml.jkeep.common.repository.BaseRepository;
 import com.ml.jkeep.common.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import java.util.Optional;
@@ -128,5 +132,15 @@ public abstract class BaseServiceImpl<R extends BaseRepository<T, ID>, T, ID> im
         return r.findAll(sort);
     }
 
-    // TODO 分页接口
+    /**
+     * 简单分页查询
+     * <p>简单的过滤条件</p>
+     *
+     * @param pageBo 分页对象
+     * @return a {@link Page} of entities matching the given
+     */
+    @Override
+    public Page<T> findSimplePage(PageBo<T> pageBo) {
+        return r.findAll(Example.of(pageBo.getParam()), PageRequest.of(pageBo.getPage(), pageBo.getSize(), Sort.Direction.DESC, pageBo.getSortableField()));
+    }
 }

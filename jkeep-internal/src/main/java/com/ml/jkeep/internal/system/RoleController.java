@@ -1,5 +1,6 @@
 package com.ml.jkeep.internal.system;
 
+import com.ml.jkeep.common.bo.PageBo;
 import com.ml.jkeep.common.controller.BaseController;
 import com.ml.jkeep.common.vo.RestVo;
 import com.ml.jkeep.jpa.system.entity.sys.Role;
@@ -35,5 +36,10 @@ public class RoleController extends BaseController {
     public RestVo deleteById(@PathVariable Long id) {
         roleService.deleteById(id);
         return RestVo.SUCCESS();
+    }
+
+    @PostMapping("page")
+    public RestVo deleteById(@RequestBody PageBo<Role> pageBo) {
+        return RestVo.SUCCESS(roleService.findSimplePage(pageBo));
     }
 }

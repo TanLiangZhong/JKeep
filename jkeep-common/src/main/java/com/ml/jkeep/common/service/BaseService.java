@@ -1,5 +1,7 @@
 package com.ml.jkeep.common.service;
 
+import com.ml.jkeep.common.bo.PageBo;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 
 import java.util.Optional;
@@ -92,5 +94,12 @@ public interface BaseService<T, ID> {
      */
     Iterable<T> findAll(Sort sort);
 
-    // TODO 分页接口
+    /**
+     * 简单分页查询
+     * <p>简单的过滤条件</p>
+     *
+     * @param pageBo 分页对象
+     * @return a {@link Page} of entities matching the given
+     */
+    Page<T> findSimplePage(PageBo<T> pageBo);
 }
