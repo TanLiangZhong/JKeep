@@ -1,4 +1,4 @@
-import axios from "/plugins/axios/axios.min"
+import {axios} from "/plugins/axios/axios.min"
 
 layui.define(exports => {
 

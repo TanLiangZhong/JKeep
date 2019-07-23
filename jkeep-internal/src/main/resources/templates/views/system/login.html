@@ -67,13 +67,13 @@
 </div>
 
 <script src="/plugins/layuiadmin/layui/layui.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     layui.config({
         base: '/plugins/layuiadmin/' //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use(['index', 'user'], function () {
+        ,axios: '{/}plugins/axios/jkeep-axios'
+    }).use(['index', 'user','axios'], function () {
         var $ = layui.$,
             setter = layui.setter,
             admin = layui.admin,
