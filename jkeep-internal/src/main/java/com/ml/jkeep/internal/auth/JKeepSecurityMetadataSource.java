@@ -2,7 +2,7 @@ package com.ml.jkeep.internal.auth;
 
 import com.ml.jkeep.common.constant.Common;
 import com.ml.jkeep.jpa.system.entity.sys.Menu;
-import com.ml.jkeep.service.system.MenuService;
+import com.ml.jkeep.service.system.impl.AuthServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
@@ -12,6 +12,7 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,7 +27,7 @@ import java.util.List;
 public class JKeepSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
     @Autowired
-    private MenuService menuService;
+    private AuthServiceImpl authService;
 
     private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
@@ -37,7 +38,7 @@ public class JKeepSecurityMetadataSource implements FilterInvocationSecurityMeta
         log.info("requestUrl : {}", requestUrl);
 
         // TODO 赋予当前 URL 可以访问的角色
-        List<Menu> allMenu = menuService.getAllMenu();
+        List<Menu> allMenu = new ArrayList<>();
         for (Menu menu : allMenu) {
             if (antPathMatcher.match(menu.getHref(), requestUrl)) {
                 // TODO

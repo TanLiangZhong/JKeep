@@ -44,13 +44,13 @@ public class UserRole {
      * 用户Id
      */
     @Column(name = "user_id")
-    private String userId;
+    private Long userId;
 
     /**
      * 角色Id
      */
     @Column(name = "role_id")
-    private String roleId;
+    private Long roleId;
 
     /**
      * null

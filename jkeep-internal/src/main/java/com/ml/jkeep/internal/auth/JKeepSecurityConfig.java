@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ml.jkeep.common.constant.Common;
 import com.ml.jkeep.common.constant.ResultMsg;
 import com.ml.jkeep.common.vo.RestVo;
-import com.ml.jkeep.service.system.impl.UserAuthServiceImpl;
+import com.ml.jkeep.service.system.impl.AuthServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
@@ -32,7 +32,7 @@ import java.io.PrintWriter;
 public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserAuthServiceImpl userAuthService;
+    private AuthServiceImpl userAuthService;
     @Autowired
     private JKeepSecurityMetadataSource securityMetadataSource;
     @Autowired
