@@ -2,7 +2,9 @@ package com.ml.jkeep.jpa.system.entity.sys;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,6 +18,7 @@ import java.util.Date;
 @Data
 @ToString
 @Entity
+@NoArgsConstructor
 @Table(name = "sys_role_link",
         indexes = {
                 @Index(name = "index_sys_role_link_role_id", columnList = "role_id"),
@@ -56,18 +59,29 @@ public class RoleLink {
      * 页面元素Id
      */
     @Column(name = "element_id")
-    private String elementId;
+    private Long elementId;
 
     /**
      * 类型( 0:菜单 1:页面元素 )
      */
     @Column(name = "type")
-    private Integer type;
+    private Byte type;
 
     /**
-     * null
+     * 创建时间
      */
+    @CreationTimestamp
     @Column(name = "gmt_created", updatable = false)
     private Date gmtCreated;
 
+    public RoleLink(Long roleId) {
+        this.roleId = roleId;
+    }
+
+    public RoleLink(Long roleId, Long menuId, Long elementId, Byte type) {
+        this.roleId = roleId;
+        this.menuId = menuId;
+        this.elementId = elementId;
+        this.type = type;
+    }
 }

@@ -8,6 +8,8 @@ import com.ml.jkeep.service.system.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 角色 - 控制器
  *
@@ -42,4 +44,17 @@ public class RoleController extends BaseController {
     public RestVo page(@RequestBody PageBo<Role> pageBo) {
         return RestVo.SUCCESS(roleService.findSimplePage(pageBo));
     }
+
+    @PostMapping("add/link")
+    public RestVo batchAddRoleLink(Long roleId, List<Long> linkIds, Byte roleLinkType) {
+        return RestVo.SUCCESS(roleService.batchAddRoleLink(roleId, linkIds, roleLinkType));
+    }
+
+    @DeleteMapping("delete/link")
+    public RestVo batchDeleteRoleLink(@RequestBody List<Long> roleLinkIds) {
+        roleService.batchDeleteRoleLink(roleLinkIds);
+        return RestVo.SUCCESS();
+    }
+
+
 }

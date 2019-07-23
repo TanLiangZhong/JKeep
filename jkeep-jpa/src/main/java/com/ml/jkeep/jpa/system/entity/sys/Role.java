@@ -2,6 +2,7 @@ package com.ml.jkeep.jpa.system.entity.sys;
 
 import lombok.Data;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -57,6 +58,7 @@ public class Role {
     /**
      * 创建时间
      */
+    @CreationTimestamp
     @Column(name = "gmt_created", updatable = false)
     private Date gmtCreated;
 

@@ -2,6 +2,7 @@ package com.ml.jkeep.jpa.system.entity.sys;
 
 
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -83,8 +84,9 @@ public class SysLog {
     private String ip;
 
     /**
-     * null
+     * 创建时间
      */
+    @CreationTimestamp
     @Column(name = "gmt_created", updatable = false)
     private Date gmtCreated;
 
