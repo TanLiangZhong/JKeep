@@ -59,7 +59,7 @@ public class AuthServiceImpl implements UserDetailsService {
      */
     public List<HrefPermissionVo> hrefPermission(Long userId) {
         List<HrefPermissionVo> vos = new ArrayList<>();
-        List<RoleLink> roleLinkList = Optional.ofNullable(roleLinkRepository.findAllByRoleIdIn(Optional.ofNullable(userRoleRepository.findAllByUserId(userId)).orElse(new ArrayList<>()).stream().map(UserRole::getRoleId).collect(Collectors.toList()))).orElse(new ArrayList<>());
+        List<RoleLink> roleLinkList = Optional.ofNullable(roleLinkRepository.findAllByRoleIdIn(Optional.ofNullable(userRoleRepository.findAllByUserId(userId)).orElse(new ArrayList<>()).stream().map(UserRole::getRoleId).collect(Collectors.toSet()))).orElse(new ArrayList<>());
         Set<Long> menuIds = new HashSet<>();
         Set<Long> elementIds = new HashSet<>();
         roleLinkList.forEach(roleLink -> {

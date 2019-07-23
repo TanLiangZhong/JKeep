@@ -5,6 +5,7 @@ import com.ml.jkeep.jpa.system.entity.sys.RoleLink;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * 角色关联表
@@ -19,7 +20,7 @@ public interface RoleLinkRepository extends BaseRepository<RoleLink, Long> {
      * 根据角色Id查询
      *
      * @param roleIds 角色Ids
-     * @return  RoleLink
+     * @return RoleLink
      */
-    List<RoleLink> findAllByRoleIdIn(List<Long> roleIds);
+    List<RoleLink> findAllByRoleIdIn(Set<Long> roleIds);
 }
