@@ -63,12 +63,8 @@ public class AuthServiceImpl implements UserDetailsService {
         Set<Long> menuIds = new HashSet<>();
         Set<Long> elementIds = new HashSet<>();
         roleLinkList.forEach(roleLink -> {
-            if (roleLink.getMenuId() != null) {
-                menuIds.add(roleLink.getMenuId());
-            }
-            if (roleLink.getElementId() != null) {
-                elementIds.add(roleLink.getElementId());
-            }
+            menuIds.add(roleLink.getMenuId());
+            elementIds.add(roleLink.getElementId());
         });
 
         // TODO
