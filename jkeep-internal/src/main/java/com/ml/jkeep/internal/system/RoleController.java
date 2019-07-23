@@ -32,14 +32,14 @@ public class RoleController extends BaseController {
         return RestVo.SUCCESS();
     }
 
-    @PostMapping("delete/{id}")
+    @DeleteMapping("delete/{id}")
     public RestVo deleteById(@PathVariable Long id) {
         roleService.deleteById(id);
         return RestVo.SUCCESS();
     }
 
     @PostMapping("page")
-    public RestVo deleteById(@RequestBody PageBo<Role> pageBo) {
+    public RestVo page(@RequestBody PageBo<Role> pageBo) {
         return RestVo.SUCCESS(roleService.findSimplePage(pageBo));
     }
 }

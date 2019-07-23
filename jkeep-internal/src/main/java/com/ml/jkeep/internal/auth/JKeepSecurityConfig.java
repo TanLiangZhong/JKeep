@@ -47,7 +47,6 @@ public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -82,7 +81,7 @@ public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
                     } else {
                         resultMsg = ResultMsg.LOGIN_FAIL;
                     }
-                    if (req.getHeader("X-CSRF-TOKEN") != null) {
+                    if (req.getHeader(Common.CSRF_TOKEN_KEY) != null) {
                         // Ajax 提交
                         resp.setStatus(HttpServletResponse.SC_OK);
                         resp.setContentType("application/json;charset=UTF-8");
@@ -96,7 +95,7 @@ public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
                     }
                 })
                 .successHandler((req, resp, auth) -> {
-                    if (req.getHeader("X-CSRF-TOKEN") != null) {
+                    if (req.getHeader(Common.CSRF_TOKEN_KEY) != null) {
                         // Ajax 提交
                         resp.setStatus(HttpServletResponse.SC_OK);
                         resp.setContentType("application/json;charset=UTF-8");

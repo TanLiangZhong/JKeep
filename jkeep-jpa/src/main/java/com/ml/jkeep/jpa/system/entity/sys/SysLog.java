@@ -16,7 +16,7 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "sys_log")
-public class Log {
+public class SysLog {
 
     /**
      * 角色关系表主键
