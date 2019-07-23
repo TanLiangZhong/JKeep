@@ -44,7 +44,7 @@ public class JKeepSecurityMetadataSource implements FilterInvocationSecurityMeta
             }
         }
         // 当 url 无需做权限控制时, 赋予默认角色可访问.
-        return SecurityConfig.createList(Common.DEFAULT_ROLE_NAME);
+        return SecurityConfig.createList(Common.ROLE_DEFAULT);
     }
 
 

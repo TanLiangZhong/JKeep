@@ -31,6 +31,9 @@
 
                 Logged user: <span sec:authentication="name">Bob</span><br/>
                 Roles: <span sec:authentication="principal.authorities"></span>
+                <div sec:authorize="${hasRole('DEFAULT')}">
+                    This will only be displayed if authenticated user has a role computed by the controller.
+                </div>
             </div>
         </div>
 

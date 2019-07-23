@@ -28,7 +28,7 @@ public class UserAuth implements UserDetails {
         List<GrantedAuthority> authorities = new ArrayList<>();
         roles.forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
         // 默认角色
-        authorities.add(new SimpleGrantedAuthority(Common.DEFAULT_ROLE_NAME));
+        authorities.add(new SimpleGrantedAuthority(Common.ROLE_DEFAULT));
         return authorities;
     }
 

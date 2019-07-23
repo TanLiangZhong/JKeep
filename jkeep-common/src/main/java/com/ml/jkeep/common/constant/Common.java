@@ -12,6 +12,6 @@ public class Common {
 
     public final static String LOGIN_PAGE_URL = "/login.html";
 
-    public final static String DEFAULT_ROLE_NAME = "DEFAULT_ROLE_NAME";
+    public final static String ROLE_DEFAULT = "ROLE_DEFAULT";
 
 }
