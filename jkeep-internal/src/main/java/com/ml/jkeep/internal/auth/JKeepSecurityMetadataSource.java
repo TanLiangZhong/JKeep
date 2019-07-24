@@ -3,7 +3,7 @@ package com.ml.jkeep.internal.auth;
 import com.alibaba.fastjson.JSON;
 import com.ml.jkeep.common.constant.Common;
 import com.ml.jkeep.jpa.system.vo.HrefPermissionVo;
-import com.ml.jkeep.service.system.impl.AuthServiceImpl;
+import com.ml.jkeep.service.system.impl.HrefPermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
@@ -29,7 +29,7 @@ import java.util.Set;
 public class JKeepSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
     @Autowired
-    private AuthServiceImpl authService;
+    private HrefPermissionService hrefPermissionService;
 
     private AntPathMatcher antPathMatcher = new AntPathMatcher();
 
@@ -37,7 +37,7 @@ public class JKeepSecurityMetadataSource implements FilterInvocationSecurityMeta
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
         FilterInvocation filterInvocation = (FilterInvocation) object;
         String requestUrl = filterInvocation.getRequestUrl();
-        Set<HrefPermissionVo> allPer = authService.hrefPermission();
+        Set<HrefPermissionVo> allPer = hrefPermissionService.hrefPermission();
         Set<String> roles = new HashSet<>();
         for (HrefPermissionVo per : allPer) {
             if (antPathMatcher.match(per.getHref(), requestUrl)) {
