@@ -1,7 +1,8 @@
 package com.ml.jkeep.internal.auth;
 
+import com.alibaba.fastjson.JSON;
 import com.ml.jkeep.common.constant.Common;
-import com.ml.jkeep.jpa.system.entity.sys.Menu;
+import com.ml.jkeep.jpa.system.vo.HrefPermissionVo;
 import com.ml.jkeep.service.system.impl.AuthServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +12,11 @@ import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
+import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 过滤器调用安全元数据源
@@ -35,16 +37,19 @@ public class JKeepSecurityMetadataSource implements FilterInvocationSecurityMeta
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
         FilterInvocation filterInvocation = (FilterInvocation) object;
         String requestUrl = filterInvocation.getRequestUrl();
-        log.info("requestUrl : {}", requestUrl);
-
-        // TODO 赋予当前 URL 可以访问的角色
-        List<Menu> allMenu = new ArrayList<>();
-        for (Menu menu : allMenu) {
-            if (antPathMatcher.match(menu.getHref(), requestUrl)) {
-                // TODO
+        Set<HrefPermissionVo> allPer = authService.hrefPermission(null);
+        Set<String> roles = new HashSet<>();
+        for (HrefPermissionVo per : allPer) {
+            if (antPathMatcher.match(per.getHref(), requestUrl)) {
+                roles.add(per.getCode());
             }
         }
-        // 当 url 无需做权限控制时, 赋予默认角色可访问.
+        if (!CollectionUtils.isEmpty(roles)) {
+            log.info("JKeepSecurityMetadataSource, requestUrl : {}, roles: {}", requestUrl, JSON.toJSONString(roles));
+            return SecurityConfig.createList(roles.toArray(new String[0]));
+        }
+        log.info("JKeepSecurityMetadataSource, requestUrl : {}, roles: {}", requestUrl, Common.ROLE_DEFAULT);
+        // 当 url 没有配置权限控制时, 赋予默认角色可访问.即所有用户都可访问
         return SecurityConfig.createList(Common.ROLE_DEFAULT);
     }
 

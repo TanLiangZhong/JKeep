@@ -1,14 +1,13 @@
 package com.ml.jkeep.jpa.system.entity.sys;
 
 import com.ml.jkeep.common.constant.Common;
+import com.ml.jkeep.jpa.system.vo.HrefPermissionVo;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * 用户身份认证信息 - Entity
@@ -21,12 +20,12 @@ public class UserAuth implements UserDetails {
 
     private String username;
     private String password;
-    private List<Role> roles = new ArrayList<>();
+    private Set<HrefPermissionVo> roles = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        roles.forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
+        roles.forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getCode())));
         // 默认角色
         authorities.add(new SimpleGrantedAuthority(Common.ROLE_DEFAULT));
         return authorities;

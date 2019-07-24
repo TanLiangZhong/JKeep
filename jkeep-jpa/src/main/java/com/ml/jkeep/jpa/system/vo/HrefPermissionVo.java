@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class HrefPermissionVo {
 
     /**
-     * 唯一标记
+     * 唯一标记, 即权限标识符
      */
     private String code;
 
