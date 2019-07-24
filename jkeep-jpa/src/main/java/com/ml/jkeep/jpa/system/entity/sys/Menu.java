@@ -116,6 +116,6 @@ public class Menu {
      * 删除标记
      */
     @Column(name = "d_flag")
-    private Integer dFlag;
+    private Byte dFlag;
 
 }

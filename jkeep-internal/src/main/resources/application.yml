@@ -16,7 +16,7 @@ spring:
   jpa:
     # 数据库
     database: mysql
-    database-platform: org.hibernate.dialect.MySQL5Dialect
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     # 是否控制台打印 sql
     show-sql: true
     hibernate:
