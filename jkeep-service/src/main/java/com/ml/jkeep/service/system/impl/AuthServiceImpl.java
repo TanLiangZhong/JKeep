@@ -42,7 +42,7 @@ public class AuthServiceImpl implements UserDetailsService {
         UserAuth userAuth = new UserAuth();
         userAuth.setUsername(user.getUsername());
         userAuth.setPassword(user.getPassword());
-        userAuth.setRoles(this.hrefPermission(user.getUserId()));
+        userAuth.setHrefPer(this.hrefPermission(user.getUserId()));
         return userAuth;
     }
 

@@ -20,12 +20,12 @@ public class UserAuth implements UserDetails {
 
     private String username;
     private String password;
-    private Set<HrefPermissionVo> roles = new HashSet<>();
+    private Set<HrefPermissionVo> hrefPer = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        roles.forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getCode())));
+        hrefPer.forEach(per -> authorities.add(new SimpleGrantedAuthority(per.getCode())));
         // 默认角色
         authorities.add(new SimpleGrantedAuthority(Common.ROLE_DEFAULT));
         return authorities;
