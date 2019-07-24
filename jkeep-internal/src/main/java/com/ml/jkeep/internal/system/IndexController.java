@@ -2,10 +2,14 @@ package com.ml.jkeep.internal.system;
 
 import com.ml.jkeep.common.controller.BaseController;
 import com.ml.jkeep.internal.auth.JKeepSecurityContextHolder;
+import com.ml.jkeep.service.system.impl.AuthServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * 主页 - Controller
@@ -18,10 +22,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class IndexController extends BaseController {
 
+    @Autowired
+    private AuthServiceImpl authService;
+
     @GetMapping("/")
     public String index() {
         log.info("User:{}", JKeepSecurityContextHolder.getUserInfo().getUsername());
+        authService.hrefPermission(1L);
+        authService.hrefPermission();
         return "views/index";
     }
+
+    @ResponseBody
+    @GetMapping("/hello")
+    public String hello(String name) {
+        authService.hrefPermission(1L);
+        authService.hrefPermission();
+        return "Hello "+ name;
+    }
+
 
 }

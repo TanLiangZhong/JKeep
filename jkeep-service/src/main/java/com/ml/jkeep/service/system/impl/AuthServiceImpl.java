@@ -1,10 +1,13 @@
 package com.ml.jkeep.service.system.impl;
 
+import com.ml.jkeep.common.constant.CacheKey;
 import com.ml.jkeep.jpa.system.entity.sys.*;
 import com.ml.jkeep.jpa.system.repository.*;
 import com.ml.jkeep.jpa.system.vo.HrefPermissionVo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,6 +26,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = CacheKey.HREF_PERMISSION_NAME)
 public class AuthServiceImpl implements UserDetailsService {
 
     private final UserRoleRepository userRoleRepository;
@@ -50,15 +54,24 @@ public class AuthServiceImpl implements UserDetailsService {
      * 获取用户可访问的 href
      *
      * @param userId 用户Id
-     * @return userId == null ? 所有权限 : 用户所有权限
+     * @return 用户所有权限
      */
+    @Cacheable(key = "T(com.ml.jkeep.common.constant.CacheKey).ALL_HREF_PERMISSION_KEY+#userId")
     public Set<HrefPermissionVo> hrefPermission(Long userId) {
-        List<RoleLink> roleLinkList;
-        if (userId == null) {
-            roleLinkList = roleLinkRepository.findAll();
-        } else {
-            roleLinkList = roleLinkRepository.findAllByRoleIdIn(Optional.ofNullable(userRoleRepository.findAllByUserId(userId)).orElse(new ArrayList<>()).stream().map(UserRole::getRoleId).collect(Collectors.toSet()));
-        }
+        log.info("测试缓存, userId: {} ", userId);
+        List<RoleLink> roleLinkList = roleLinkRepository.findAllByRoleIdIn(Optional.ofNullable(userRoleRepository.findAllByUserId(userId)).orElse(new ArrayList<>()).stream().map(UserRole::getRoleId).collect(Collectors.toSet()));
+        return this.convert(roleLinkList);
+    }
+
+    /**
+     * 获取所有href权限配置
+     *
+     * @return 所有权限
+     */
+    @Cacheable(key = "T(com.ml.jkeep.common.constant.CacheKey).ALL_HREF_PERMISSION_KEY")
+    public Set<HrefPermissionVo> hrefPermission() {
+        log.info("测试缓存, ALL_HREF_PERMISSION_KEY");
+        List<RoleLink> roleLinkList = roleLinkRepository.findAll();
         return this.convert(roleLinkList);
     }
 

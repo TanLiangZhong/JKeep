@@ -37,7 +37,7 @@ public class JKeepSecurityMetadataSource implements FilterInvocationSecurityMeta
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
         FilterInvocation filterInvocation = (FilterInvocation) object;
         String requestUrl = filterInvocation.getRequestUrl();
-        Set<HrefPermissionVo> allPer = authService.hrefPermission(null);
+        Set<HrefPermissionVo> allPer = authService.hrefPermission();
         Set<String> roles = new HashSet<>();
         for (HrefPermissionVo per : allPer) {
             if (antPathMatcher.match(per.getHref(), requestUrl)) {
