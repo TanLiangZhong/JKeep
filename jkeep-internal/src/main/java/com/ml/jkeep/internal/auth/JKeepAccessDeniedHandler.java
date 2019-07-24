@@ -27,9 +27,9 @@ public class JKeepAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {
         // TODO 带优化有Bug , 若 Ajax 请求不传 X-CSRF-TOKEN 当如何？
-        log.info("处理访问被拒 , Parameter: {}, RequestURI: {}, RemoteUser: {}, RemoteAddr: {}",
+        log.info("处理访问被拒 , Parameter: {}, RequestURI: {}, RemoteUser: {}, RemoteAddr: {}, Message: {}",
                 JSONObject.toJSONString(request.getParameterMap()), request.getRequestURI(),
-                request.getRemoteUser(), request.getRemoteAddr());
+                request.getRemoteUser(), request.getRemoteAddr(), accessDeniedException.getMessage());
         if (request.getHeader(Common.CSRF_TOKEN_KEY) != null) {
             // Ajax 提交
             response.setStatus(HttpServletResponse.SC_OK);

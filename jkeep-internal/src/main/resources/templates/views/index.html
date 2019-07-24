@@ -4,6 +4,9 @@
 <head>
     <meta charset="utf-8">
     <title>JKeep-Index</title>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
@@ -48,7 +51,27 @@
         base: '/plugins/layuiadmin/' //静态资源所在路径
     }).extend({
         index: 'lib/index' //主入口模块
-    }).use('index');
+    }).use('index', function () {
+        let $ = layui.$, admin = layui.admin,
+            _csrf_header = $("meta[name='_csrf_header']").attr("content"),
+            _csrf = $("meta[name='_csrf']").attr("content");
+        // 登出
+        admin.events.logout = function () {
+            //执行退出接口
+            admin.req({
+                url: 'logout',
+                type: 'POST',
+                headers: {[_csrf_header]: _csrf},
+                done: function (res) { //这里要说明一下：done 是只有 response 的 code 正常才会执行。而 succese 则是只要 http 为 200 就会执行
+                    //清空本地记录的 token，并跳转到登入页
+                    admin.exit(function () {
+                        location.href = '/login.html';
+                    });
+                }
+            });
+        };
+
+    });
 </script>
 </body>
 </html>

@@ -87,12 +87,12 @@ layui.define(['laytpl', 'layer'], function(exports){
         var statusCode = response.statusCode;
         
         //只有 response 的 code 一切正常才执行 done
-        if(res[response.statusName] == statusCode.ok) {
+        if(res[response.statusName] === statusCode.ok) {
           typeof options.done === 'function' && options.done(res); 
-        } 
-        
+        }
+
         //登录状态失效，清除本地 access_token，并强制跳转到登入页
-        else if(res[response.statusName] == statusCode.logout){
+        else if(res[response.statusName] === statusCode.logout){
           view.exit();
         }
         

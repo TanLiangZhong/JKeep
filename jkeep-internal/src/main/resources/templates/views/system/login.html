@@ -28,13 +28,13 @@
                 <label class="layadmin-user-login-icon layui-icon layui-icon-username"
                        for="LAY-user-login-username"></label>
                 <input type="text" name="username" id="LAY-user-login-username" lay-verify="required" placeholder="用户名"
-                       class="layui-input">
+                       class="layui-input" value="jkeep">
             </div>
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-password"
                        for="LAY-user-login-password"></label>
                 <input type="password" name="password" id="LAY-user-login-password" lay-verify="required"
-                       placeholder="密码" class="layui-input">
+                       placeholder="密码" class="layui-input" value="jkeep">
             </div>
             <!--<div class="layui-form-item"> TODO 后续添加
                 <div class="layui-row">
@@ -80,51 +80,25 @@
             admin = layui.admin,
             form = layui.form,
             router = layui.router(),
-            search = router.search;
+            search = router.search,
+            _csrf_header = $("meta[name='_csrf_header']").attr("content"),
+            _csrf = $("meta[name='_csrf']").attr("content");
         form.render();
         //提交
         form.on('submit(LAY-user-login-submit)', function (obj) {
-            const _csrf_header = $("meta[name='_csrf_header']").attr("content");
-            const _csrf = $("meta[name='_csrf']").attr("content");
-            axios.request({
-                method: 'POST',
-                url: '/login',
-                params: obj.field,
-                headers: {[_csrf_header]: _csrf}
-            }).then(resp => {
-                console.log(resp);
-                const data = resp.data;
-                if (data.success) {
-                    window.location.href = "/";
+            admin.req({
+                url: 'login',
+                type: 'POST',
+                data: obj.field,
+                headers: {[_csrf_header]: _csrf},
+                done: function (resp) { //这里要说明一下：done 是只有 response 的 code 正常才会执行。而 succese 则是只要 http 为 200 就会执行
+                    if (resp.success) {
+                        window.location.href = "/";
+                    }else{
+                        layer.msg(resp.message);
+                    }
                 }
-                layer.msg(data.message);
-            }).catch(error => {
-                console.log(error);
             });
-
-            //请求登入接口
-            // admin.req({
-            //     url: '/login',//实际使用请改成服务端真实接口
-            //     data: obj.field,
-            //     done: function (res) {
-            //         console.log(res);
-            //         //请求成功后，写入 access_token
-            //         layui.data(setter.tableName, {
-            //             key: setter.request.tokenName
-            //             , value: res.data.access_token
-            //         });
-            //
-            //         //登入成功的提示与跳转
-            //         // layer.msg('登入成功', {
-            //         //     offset: '15px'
-            //         //     , icon: 1
-            //         //     , time: 1000
-            //         // }, function () {
-            //         //     location.href = '../'; //后台主页
-            //         // });
-            //     }
-            // });
-
         });
 
     });

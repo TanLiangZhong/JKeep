@@ -112,7 +112,18 @@ public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/logout")
                 .logoutSuccessHandler((req, resp, authentication) -> {
                     //  注销成功重定向登录页
-                    resp.sendRedirect("/login.html");
+                    if (req.getHeader(Common.CSRF_TOKEN_KEY) != null) {
+                        // Ajax 提交
+                        resp.setStatus(HttpServletResponse.SC_OK);
+                        resp.setContentType("application/json;charset=UTF-8");
+                        PrintWriter out = resp.getWriter();
+                        out.write(JSONObject.toJSONString(RestVo.SUCCESS("登出成功")));
+                        out.flush();
+                        out.close();
+                    } else {
+                        // 表单提交
+                        resp.sendRedirect("/login.html");
+                    }
                 })
                 .permitAll()
                 .and()

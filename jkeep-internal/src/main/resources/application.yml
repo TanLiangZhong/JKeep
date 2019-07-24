@@ -7,9 +7,12 @@ spring:
 
   # 指定数据源
   datasource:
-    url: jdbc:mysql://rm-uf6ei0ncf08876co9zo.mysql.rds.aliyuncs.com:3306/jkeep?autoReconnect=true&useUnicode=true&amp&characterEncoding=UTF-8
-    username: jkeep
-    password: jkeep2019___
+#    url: jdbc:mysql://rm-uf6ei0ncf08876co9zo.mysql.rds.aliyuncs.com:3306/jkeep?autoReconnect=true&useUnicode=true&amp&characterEncoding=UTF-8
+#    username: jkeep
+#    password: jkeep2019___
+    url: jdbc:mysql://localhost:3306/jkeep?autoReconnect=true&useUnicode=true&amp&characterEncoding=UTF-8
+    username: root
+    password: my-secret-pw
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   #jap 配置

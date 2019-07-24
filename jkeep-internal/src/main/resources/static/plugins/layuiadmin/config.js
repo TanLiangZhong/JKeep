@@ -22,11 +22,11 @@ layui.define(['laytpl', 'layer', 'element', 'util'], function(exports){
     ,response: {
       statusName: 'code' //数据状态的字段名称
       ,statusCode: {
-        ok: 0 //数据状态一切正常的状态码
-        ,logout: 1001 //登录状态失效的状态码
+        ok: 'S0000' //数据状态一切正常的状态码
+        ,logout: 'F0003' //登录状态失效的状态码
       }
-      ,msgName: 'msg' //状态信息的字段名称
-      ,dataName: 'data' //数据详情的字段名称
+      ,msgName: 'message' //状态信息的字段名称
+      ,dataName: 'result' //数据详情的字段名称
     }
     
     //扩展的第三方模块
