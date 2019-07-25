@@ -50,7 +50,7 @@ public class JKeepSecurityContextHolder {
      *
      * @return 是否已经登陆
      */
-    public static Object isAuthenticated() {
+    public static boolean isAuthenticated() {
         return SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
     }
 

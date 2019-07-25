@@ -68,16 +68,22 @@ public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
                     ResultMsg resultMsg;
                     if (e instanceof BadCredentialsException ||
                             e instanceof UsernameNotFoundException) {
+                        // 账户名或者密码输入错误
                         resultMsg = ResultMsg.LOGIN_FAIL_WRONG_PASSWORD;
                     } else if (e instanceof LockedException) {
+                        // 账户被锁定,请联系管理员!
                         resultMsg = ResultMsg.LOGIN_FAIL_LOCKED;
                     } else if (e instanceof CredentialsExpiredException) {
+                        // 登录过期,请重新登录!
                         resultMsg = ResultMsg.LOGIN_FAIL_CREDENTIALS_EXPIRED;
                     } else if (e instanceof AccountExpiredException) {
+                        // 账户过期,请联系管理员!
                         resultMsg = ResultMsg.LOGIN_FAIL_ACCOUNT_EXPIRED;
                     } else if (e instanceof DisabledException) {
+                        // 账户被禁用,请联系管理员!
                         resultMsg = ResultMsg.LOGIN_FAIL_DISABLED;
                     } else {
+                        // 登录失败,请联系管理员!
                         resultMsg = ResultMsg.LOGIN_FAIL;
                     }
                     if (req.getHeader(Common.CSRF_TOKEN_KEY) != null) {
