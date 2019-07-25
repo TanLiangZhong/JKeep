@@ -45,9 +45,7 @@ public class HrefPermissionService {
      */
     @Cacheable(key = "T(com.ml.jkeep.common.constant.CacheKey).ALL_HREF_PERMISSION_KEY+#userId")
     public Set<HrefPermissionVo> hrefPermission(Long userId) {
-        log.info("测试缓存, userId: {} ", userId);
-        List<RoleLink> roleLinkList = roleLinkRepository.findAllByRoleIdIn(Optional.ofNullable(userRoleRepository.findAllByUserId(userId)).orElse(new ArrayList<>()).stream().map(UserRole::getRoleId).collect(Collectors.toSet()));
-        return this.convert(roleLinkList);
+        return this.convert(roleLinkRepository.findAllByRoleIdIn(Optional.ofNullable(userRoleRepository.findAllByUserId(userId)).orElse(new ArrayList<>()).stream().map(UserRole::getRoleId).collect(Collectors.toSet())));
     }
 
     /**
@@ -57,9 +55,7 @@ public class HrefPermissionService {
      */
     @Cacheable(key = "T(com.ml.jkeep.common.constant.CacheKey).ALL_HREF_PERMISSION_KEY")
     public Set<HrefPermissionVo> hrefPermission() {
-        log.info("测试缓存, ALL_HREF_PERMISSION_KEY");
-        List<RoleLink> roleLinkList = roleLinkRepository.findAll();
-        return this.convert(roleLinkList);
+        return this.convert(roleLinkRepository.findAll());
     }
 
     private Set<HrefPermissionVo> convert(List<RoleLink> roleLinkList) {
