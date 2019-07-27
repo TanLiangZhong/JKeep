@@ -18,6 +18,7 @@ import java.util.*;
 @Data
 public class UserAuth implements UserDetails {
 
+    private Long userId;
     private String username;
     private String password;
     private Set<HrefPermissionVo> hrefPer = new HashSet<>();

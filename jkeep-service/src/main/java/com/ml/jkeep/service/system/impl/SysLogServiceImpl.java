@@ -4,6 +4,8 @@ import com.ml.jkeep.common.service.impl.BaseServiceImpl;
 import com.ml.jkeep.jpa.system.entity.sys.SysLog;
 import com.ml.jkeep.jpa.system.repository.SysLogRepository;
 import com.ml.jkeep.service.system.SysLogService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,4 +16,14 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SysLogServiceImpl extends BaseServiceImpl<SysLogRepository, SysLog, Long> implements SysLogService {
+
+    @Autowired
+    private SysLogRepository sysLogRepository;
+
+    @Async
+    @Override
+    public boolean insertLog(SysLog log) {
+        sysLogRepository.save(log);
+        return true;
+    }
 }

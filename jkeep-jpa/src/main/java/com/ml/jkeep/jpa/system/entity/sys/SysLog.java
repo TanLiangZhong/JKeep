@@ -36,13 +36,13 @@ public class SysLog {
     private Long logId;
 
     /**
-     * 角色Id
+     * 用户Id
      */
     @Column(name = "user_id")
     private Long userId;
 
     /**
-     * 菜单
+     * 用户名
      */
     @Column(name = "username")
     private String username;
@@ -82,6 +82,12 @@ public class SysLog {
      */
     @Column(name = "ip")
     private String ip;
+
+    /**
+     * 耗时
+     */
+    @Column(name = "time_consuming")
+    private Long timeConsuming;
 
     /**
      * 创建时间
