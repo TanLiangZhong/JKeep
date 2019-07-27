@@ -4,6 +4,8 @@ import com.ml.jkeep.common.repository.BaseRepository;
 import com.ml.jkeep.jpa.system.entity.sys.DictLst;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * 数据字典列表
  *
@@ -13,4 +15,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DictLstRepository extends BaseRepository<DictLst, Long> {
 
+    /**
+     * 查询数据字典列表
+     *
+     * @param dictId
+     * @return
+     */
+    List<DictLst> findAllByDictId(Long dictId);
 }
