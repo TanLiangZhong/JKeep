@@ -18,6 +18,6 @@ public interface SysLogService extends BaseService<SysLog, Long> {
      * @param log
      * @return
      */
-    boolean insertLog(SysLog log);
+    void insertLog(SysLog log);
 
 }

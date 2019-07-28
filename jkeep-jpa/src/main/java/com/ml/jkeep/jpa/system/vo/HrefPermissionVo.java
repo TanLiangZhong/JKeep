@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * 链接权限 - vo
  *
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class HrefPermissionVo {
+public class HrefPermissionVo implements Serializable {
 
     /**
      * 唯一标记, 即权限标识符

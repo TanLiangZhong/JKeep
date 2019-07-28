@@ -10,6 +10,7 @@ import com.ml.jkeep.jpa.system.repository.MenuRepository;
 import com.ml.jkeep.jpa.system.repository.RoleLinkRepository;
 import com.ml.jkeep.jpa.system.repository.UserRoleRepository;
 import com.ml.jkeep.jpa.system.vo.HrefPermissionVo;
+import com.ml.jkeep.service.system.HrefPermissionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CacheConfig;
@@ -30,29 +31,20 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @CacheConfig(cacheNames = CacheKey.HREF_PERMISSION_NAME)
-public class HrefPermissionService {
+public class HrefPermissionServiceImpl implements HrefPermissionService {
 
     private final UserRoleRepository userRoleRepository;
     private final RoleLinkRepository roleLinkRepository;
     private final ElementRepository elementRepository;
     private final MenuRepository menuRepository;
 
-    /**
-     * 获取用户可访问的 href
-     *
-     * @param userId 用户Id
-     * @return 用户所有权限
-     */
+    @Override
     @Cacheable(key = "T(com.ml.jkeep.common.constant.CacheKey).ALL_HREF_PERMISSION_KEY+#userId")
     public Set<HrefPermissionVo> hrefPermission(Long userId) {
         return this.convert(roleLinkRepository.findAllByRoleIdIn(Optional.ofNullable(userRoleRepository.findAllByUserId(userId)).orElse(new ArrayList<>()).stream().map(UserRole::getRoleId).collect(Collectors.toSet())));
     }
 
-    /**
-     * 获取所有href权限配置
-     *
-     * @return 所有权限
-     */
+    @Override
     @Cacheable(key = "T(com.ml.jkeep.common.constant.CacheKey).ALL_HREF_PERMISSION_KEY")
     public Set<HrefPermissionVo> hrefPermission() {
         return this.convert(roleLinkRepository.findAll());

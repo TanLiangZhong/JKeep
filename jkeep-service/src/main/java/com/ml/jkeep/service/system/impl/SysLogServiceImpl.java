@@ -22,8 +22,7 @@ public class SysLogServiceImpl extends BaseServiceImpl<SysLogRepository, SysLog,
 
     @Async
     @Override
-    public boolean insertLog(SysLog log) {
+    public void insertLog(SysLog log) {
         sysLogRepository.save(log);
-        return true;
     }
 }

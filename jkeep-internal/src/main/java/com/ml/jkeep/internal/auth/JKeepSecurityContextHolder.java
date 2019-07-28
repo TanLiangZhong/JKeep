@@ -2,13 +2,8 @@ package com.ml.jkeep.internal.auth;
 
 import com.alibaba.fastjson.JSONObject;
 import com.ml.jkeep.jpa.system.entity.sys.UserAuth;
-import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * 令牌持有者(身份认证相关信息)
@@ -24,7 +19,7 @@ public class JKeepSecurityContextHolder {
      * @return sessionId
      */
     public static String getSessionId() {
-        return getDetails().getString("sessionId");
+        return getDetails() == null ? null : getDetails().getString("sessionId");
     }
 
     /**
@@ -33,7 +28,7 @@ public class JKeepSecurityContextHolder {
      * @return {"remoteAddress":"0:0:0:0:0:0:0:1","sessionId":"DECEC3BE2FC3F2D2002624E155939F35"}
      */
     public static JSONObject getDetails() {
-        return (JSONObject) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        return getAuthentication() == null ? null : (JSONObject) getAuthentication().getDetails();
     }
 
     /**
@@ -42,7 +37,7 @@ public class JKeepSecurityContextHolder {
      * @return 用户信息
      */
     public static UserAuth getUserInfo() {
-        return (UserAuth) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return getAuthentication() == null ? null : (UserAuth) getAuthentication().getPrincipal();
     }
 
     /**
@@ -51,15 +46,10 @@ public class JKeepSecurityContextHolder {
      * @return 是否已经登陆
      */
     public static boolean isAuthenticated() {
-        return SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
+        return getAuthentication() != null && getAuthentication().isAuthenticated();
     }
 
-    /**
-     * 获得用户所持有的角色
-     *
-     * @return 角色集合
-     */
-    public static Set<String> getRoles() {
-        return Optional.ofNullable(SecurityContextHolder.getContext().getAuthentication().getAuthorities()).orElse(new ArrayList<>()).stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
+    private static Authentication getAuthentication() {
+        return SecurityContextHolder.getContext().getAuthentication();
     }
 }

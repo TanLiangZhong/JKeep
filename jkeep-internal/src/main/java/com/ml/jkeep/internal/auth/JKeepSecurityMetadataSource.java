@@ -3,7 +3,7 @@ package com.ml.jkeep.internal.auth;
 import com.alibaba.fastjson.JSON;
 import com.ml.jkeep.common.constant.Common;
 import com.ml.jkeep.jpa.system.vo.HrefPermissionVo;
-import com.ml.jkeep.service.system.impl.HrefPermissionService;
+import com.ml.jkeep.service.system.HrefPermissionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;

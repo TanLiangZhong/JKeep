@@ -3,11 +3,14 @@ package com.ml.jkeep.service.system.impl;
 import com.ml.jkeep.jpa.system.entity.sys.User;
 import com.ml.jkeep.jpa.system.entity.sys.UserAuth;
 import com.ml.jkeep.jpa.system.repository.UserRepository;
+import com.ml.jkeep.service.system.HrefPermissionService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,10 +37,13 @@ public class AuthServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("请输入正确的用户名");
         }
         UserAuth userAuth = new UserAuth();
-        userAuth.setUsername(user.getUsername());
-        userAuth.setPassword(user.getPassword());
+        BeanUtils.copyProperties(user,userAuth);
         userAuth.setHrefPer(hrefPermissionService.hrefPermission(user.getUserId()));
         return userAuth;
     }
 
+    public static void main(String[] args) {
+        BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
+        log.info(bpe.encode("jkeep"));
+    }
 }
