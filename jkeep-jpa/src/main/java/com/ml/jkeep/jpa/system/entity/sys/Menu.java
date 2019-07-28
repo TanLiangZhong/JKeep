@@ -32,7 +32,7 @@ public class Menu {
             pkColumnName = "seq_name",
             pkColumnValue = "seq_sys_menu",
             valueColumnName = "current_value",
-            allocationSize = 20
+            allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "ID_GENERATOR")
     @Column(name = "menu_id")

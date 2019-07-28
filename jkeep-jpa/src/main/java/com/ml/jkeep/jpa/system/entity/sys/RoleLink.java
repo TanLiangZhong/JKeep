@@ -36,7 +36,7 @@ public class RoleLink {
             pkColumnName = "seq_name",
             pkColumnValue = "seq_sys_role_link",
             valueColumnName = "current_value",
-            allocationSize = 20
+            allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "ID_GENERATOR")
     @Column(name = "role_link_id")

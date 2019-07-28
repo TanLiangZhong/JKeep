@@ -31,7 +31,7 @@ public class Branch {
             pkColumnName = "seq_name",
             pkColumnValue = "seq_sys_branch",
             valueColumnName = "current_value",
-            allocationSize = 20
+            allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "ID_GENERATOR")
     @Column(name = "branch_id")

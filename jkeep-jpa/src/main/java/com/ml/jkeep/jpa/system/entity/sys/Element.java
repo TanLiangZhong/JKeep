@@ -33,7 +33,7 @@ public class Element {
             pkColumnName = "seq_name",
             pkColumnValue = "seq_sys_element",
             valueColumnName = "current_value",
-            allocationSize = 20
+            allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "ID_GENERATOR")
     @Column(name = "element_id")

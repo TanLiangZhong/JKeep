@@ -28,7 +28,7 @@ public class Dict {
             pkColumnName = "seq_name",
             pkColumnValue = "seq_sys_dict",
             valueColumnName = "current_value",
-            allocationSize = 20
+            allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "ID_GENERATOR")
     @Column(name = "dict_id")

@@ -2,6 +2,7 @@ package com.ml.jkeep.jpa.system.entity.sys;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ import java.util.Date;
  */
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "sys_log")
 public class SysLog {
 
@@ -28,7 +30,7 @@ public class SysLog {
             pkColumnName = "seq_name",
             pkColumnValue = "seq_sys_log",
             valueColumnName = "current_value",
-            allocationSize = 20
+            allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "ID_GENERATOR")
     @Column(name = "log_id")
@@ -96,4 +98,15 @@ public class SysLog {
     @Column(name = "gmt_created", updatable = false)
     private Date gmtCreated;
 
+    public SysLog(Long userId, String username, String modules, String href, String operation, String params, String method, String ip, Long timeConsuming) {
+        this.userId = userId;
+        this.username = username;
+        this.modules = modules;
+        this.href = href;
+        this.operation = operation;
+        this.params = params;
+        this.method = method;
+        this.ip = ip;
+        this.timeConsuming = timeConsuming;
+    }
 }
