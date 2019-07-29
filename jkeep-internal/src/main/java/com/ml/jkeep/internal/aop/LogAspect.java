@@ -59,57 +59,52 @@ public class LogAspect {
      */
     @Around("controllerAspect()")
     public Object doAround(final ProceedingJoinPoint pjp) throws Throwable {
-        Object result = null;
-        try {
-            Object[] args = pjp.getArgs();
-            MethodSignature methodSignature = (MethodSignature) pjp.getStaticPart().getSignature();
-            Method method = methodSignature.getMethod();
-            Annotation[][] parameterAnnotations = method.getParameterAnnotations();
-            assert args.length == parameterAnnotations.length;
-            StringBuilder pathParam = new StringBuilder();
-            String bodyParam = null;
-            for (int argIndex = 0; argIndex < args.length; argIndex++) {
-                for (Annotation annotation : parameterAnnotations[argIndex]) {
-                    if (annotation instanceof PathVariable) {
-                        if (args[argIndex] != null) {
-                            pathParam.append(args[argIndex]).append("&");
-                        }
-                    } else if (annotation instanceof RequestBody) {
-                        bodyParam = JSON.toJSONString(args[argIndex], SerializerFeature.DisableCircularReferenceDetect);
+        Object[] args = pjp.getArgs();
+        MethodSignature methodSignature = (MethodSignature) pjp.getStaticPart().getSignature();
+        Method method = methodSignature.getMethod();
+        Annotation[][] parameterAnnotations = method.getParameterAnnotations();
+        assert args.length == parameterAnnotations.length;
+        StringBuilder pathParam = new StringBuilder();
+        String bodyParam = null;
+        for (int argIndex = 0; argIndex < args.length; argIndex++) {
+            for (Annotation annotation : parameterAnnotations[argIndex]) {
+                if (annotation instanceof PathVariable) {
+                    if (args[argIndex] != null) {
+                        pathParam.append(args[argIndex]).append("&");
                     }
+                } else if (annotation instanceof RequestBody) {
+                    bodyParam = JSON.toJSONString(args[argIndex], SerializerFeature.DisableCircularReferenceDetect);
                 }
             }
-            HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
-            String methodName = pjp.getTarget().getClass().getName() + "." + pjp.getSignature().getName();
-            log.info(appendArgs(methodName, pathParam.toString(), request.getParameterMap().toString(), bodyParam, null));
-            long begin = System.currentTimeMillis();
-            result = pjp.proceed();
-            Long timeConsuming = System.currentTimeMillis() - begin;
-            log.info("结果: {}, 耗时: {}", JSON.toJSONString(result), timeConsuming);
-
-            // 保存系统日志
-            JSONObject param = new JSONObject();
-            param.put("PathParam", pathParam);
-            param.put("RequestParam", request.getParameterMap());
-            param.put("BodyParam", bodyParam);
-            UserAuth user = Optional.ofNullable(JKeepSecurityContextHolder.getUserInfo()).orElse(new UserAuth());
-            sysLogService.insertLog(new SysLog(user.getUserId(), user.getUsername(), "system", request.getRequestURI(), request.getMethod(), param.toJSONString(), methodName, request.getRemoteAddr(), timeConsuming));
-        } catch (Exception ex) {
-            log.error("控制器拦截异常,", ex);
         }
+        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+        String methodName = pjp.getTarget().getClass().getName() + "." + pjp.getSignature().getName();
+        log.info(appendArgs(methodName, pathParam.toString(), request.getParameterMap().toString(), bodyParam, null));
+        long begin = System.currentTimeMillis();
+        Object result = pjp.proceed();
+        Long timeConsuming = System.currentTimeMillis() - begin;
+        log.info("结果: {}, 耗时: {}", JSON.toJSONString(result), timeConsuming);
+
+        // 保存系统日志
+        JSONObject param = new JSONObject();
+        param.put("PathParam", pathParam);
+        param.put("RequestParam", request.getParameterMap());
+        param.put("BodyParam", bodyParam);
+        UserAuth user = Optional.ofNullable(JKeepSecurityContextHolder.getUserInfo()).orElse(new UserAuth());
+        sysLogService.insertLog(new SysLog(user.getUserId(), user.getUsername(), "system", request.getRequestURI(), request.getMethod(), param.toJSONString(), methodName, request.getRemoteAddr(), timeConsuming));
         return result;
     }
 
-//    /**
-//     * 异常通知，在方法抛出异常之后
-//     *
-//     * @param joinPoint
-//     * @param e
-//     */
-//    @AfterThrowing(pointcut = "controllerAspect()", throwing = "e")
-//    public void doAfterThrowing(JoinPoint joinPoint, Throwable e) {
-//        log.info("AfterThrowing, 方法抛出异常后执行通知，{} , Error: {}", joinPoint, e.getMessage());
-//    }
+    /**
+     * 异常通知，在方法抛出异常之后
+     *
+     * @param joinPoint
+     * @param e
+     */
+    @AfterThrowing(pointcut = "controllerAspect()", throwing = "e")
+    public void doAfterThrowing(JoinPoint joinPoint, Throwable e) {
+        log.info("AfterThrowing, 方法抛出异常后执行通知，{} , Error: {}", joinPoint, e.getMessage());
+    }
 
     /**
      * 拼接参数
