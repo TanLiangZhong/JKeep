@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Slf4j
 @Controller
-@RequestMapping
+@RequestMapping("/")
 public class IndexController extends BaseController {
 
-    @GetMapping("/")
+    @GetMapping
     public String index() {
         // TODO 获取用户菜单.
         return "views/index";
