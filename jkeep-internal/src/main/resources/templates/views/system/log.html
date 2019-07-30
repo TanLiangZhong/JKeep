@@ -84,16 +84,16 @@
                 console.log(res);
                 return {
                     "code": res.code, //解析接口状态
-                    "msg": res.message, //解析提示文本
-                    "count": res.result.total, //解析数据长度
+                    "message": res.message, //解析提示文本
+                    "total": res.result.total, //解析数据长度
                     "data": res.result.data //解析数据列表
                 };
             },
             //,skin: 'line' //表格风格
             loading: true,
             page: true,
-            limits: [30, 70, 100],
-            limit: 30
+            limits: [7, 70, 100],
+            limit: 7
         });
 
     });

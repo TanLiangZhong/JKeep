@@ -143,10 +143,12 @@ public abstract class BaseServiceImpl<R extends BaseRepository<T, ID>, T, ID> im
     @Override
     public PageVo<T> findSimplePage(PageBo<T> pageBo) {
         Page<T> page;
+        // page 从 0 开始
+        int pageNo = pageBo.getPage() - 1;
         if (pageBo.getParam() == null) {
-            page = r.findAll(PageRequest.of(pageBo.getPage(), pageBo.getSize(), Sort.Direction.DESC, pageBo.getSortableField()));
+            page = r.findAll(PageRequest.of(pageNo, pageBo.getSize(), Sort.Direction.DESC, pageBo.getSortableField()));
         } else {
-            page = r.findAll(Example.of(pageBo.getParam()), PageRequest.of(pageBo.getPage(), pageBo.getSize(), Sort.Direction.DESC, pageBo.getSortableField()));
+            page = r.findAll(Example.of(pageBo.getParam()), PageRequest.of(pageNo, pageBo.getSize(), Sort.Direction.DESC, pageBo.getSortableField()));
         }
         PageVo<T> pageVo = new PageVo<>();
         pageVo.setPage(pageBo.getPage());
