@@ -3,6 +3,7 @@ package com.ml.jkeep.common.service.impl;
 import com.ml.jkeep.common.bo.PageBo;
 import com.ml.jkeep.common.repository.BaseRepository;
 import com.ml.jkeep.common.service.BaseService;
+import com.ml.jkeep.common.vo.PageVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -140,7 +141,19 @@ public abstract class BaseServiceImpl<R extends BaseRepository<T, ID>, T, ID> im
      * @return a {@link Page} of entities matching the given
      */
     @Override
-    public Page<T> findSimplePage(PageBo<T> pageBo) {
-        return r.findAll(Example.of(pageBo.getParam()), PageRequest.of(pageBo.getPage(), pageBo.getSize(), Sort.Direction.DESC, pageBo.getSortableField()));
+    public PageVo<T> findSimplePage(PageBo<T> pageBo) {
+        Page<T> page;
+        if (pageBo.getParam() == null) {
+            page = r.findAll(PageRequest.of(pageBo.getPage(), pageBo.getSize(), Sort.Direction.DESC, pageBo.getSortableField()));
+        } else {
+            page = r.findAll(Example.of(pageBo.getParam()), PageRequest.of(pageBo.getPage(), pageBo.getSize(), Sort.Direction.DESC, pageBo.getSortableField()));
+        }
+        PageVo<T> pageVo = new PageVo<>();
+        pageVo.setPage(pageBo.getPage());
+        pageVo.setSize(pageBo.getSize());
+        pageVo.setTotal(page.getTotalElements());
+        pageVo.setTotalPages(page.getTotalPages());
+        pageVo.setData(page.getContent());
+        return pageVo;
     }
 }

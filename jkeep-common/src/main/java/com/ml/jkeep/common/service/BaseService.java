@@ -1,6 +1,7 @@
 package com.ml.jkeep.common.service;
 
 import com.ml.jkeep.common.bo.PageBo;
+import com.ml.jkeep.common.vo.PageVo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 
@@ -101,5 +102,5 @@ public interface BaseService<T, ID> {
      * @param pageBo 分页对象
      * @return a {@link Page} of entities matching the given
      */
-    Page<T> findSimplePage(PageBo<T> pageBo);
+    PageVo<T> findSimplePage(PageBo<T> pageBo);
 }

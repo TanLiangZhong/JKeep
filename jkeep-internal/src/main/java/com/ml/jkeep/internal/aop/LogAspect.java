@@ -78,8 +78,8 @@ public class LogAspect {
             }
         }
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
-        String methodName = pjp.getTarget().getClass().getName() + "." + pjp.getSignature().getName();
-        log.info(appendArgs(methodName, pathParam.toString(), request.getParameterMap().toString(), bodyParam, null));
+        String methodName = pjp.getTarget().getClass().getName() + "." + method.getName();
+        log.info(appendArgs(methodName, pathParam.toString(), JSON.toJSONString(request.getParameterMap()), bodyParam, null));
         long begin = System.currentTimeMillis();
         Object result = pjp.proceed();
         Long timeConsuming = System.currentTimeMillis() - begin;
