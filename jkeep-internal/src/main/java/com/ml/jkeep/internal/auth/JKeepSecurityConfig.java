@@ -7,6 +7,7 @@ import com.ml.jkeep.common.vo.RestVo;
 import com.ml.jkeep.service.system.impl.AuthServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -39,6 +40,12 @@ public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
     private JKeepAccessDecisionManager accessDecisionManager;
     @Autowired
     private JKeepAccessDeniedHandler accessDeniedHandler;
+
+    /**
+     * 令牌有效期秒
+     */
+    @Value("${JKeep.auth.token-validity}")
+    private int tokenValidity;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -135,6 +142,10 @@ public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling()
                 .accessDeniedHandler(accessDeniedHandler)
+                // X-Frame-Options: SAMEORIGIN, 允许来自同一源的任何请求. 若frame需要访问其他域的页面, 需禁用此功能.
+                .and().headers().frameOptions().sameOrigin()
+                // 记住密码
+                .and().rememberMe().tokenValiditySeconds(tokenValidity)
 //                .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
         ;
     }

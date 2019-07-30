@@ -54,3 +54,5 @@ logging:
 JKeep:
   logAop:
     enable: true
+  auth:
+    token-validity: 7200
