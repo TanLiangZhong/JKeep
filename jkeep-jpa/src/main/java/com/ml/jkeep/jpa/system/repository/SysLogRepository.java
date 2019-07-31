@@ -1,7 +1,7 @@
 package com.ml.jkeep.jpa.system.repository;
 
-import com.ml.jkeep.common.repository.BaseRepository;
-import com.ml.jkeep.jpa.system.entity.sys.SysLog;
+import com.ml.jkeep.jpa.BaseRepository;
+import com.ml.jkeep.jpa.system.entity.SysLog;
 import org.springframework.stereotype.Repository;
 
 /**

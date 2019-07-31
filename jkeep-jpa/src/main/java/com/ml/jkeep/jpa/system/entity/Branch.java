@@ -1,4 +1,4 @@
-package com.ml.jkeep.jpa.system.entity.sys;
+package com.ml.jkeep.jpa.system.entity;
 
 import lombok.Data;
 import lombok.ToString;
@@ -7,74 +7,57 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 
-
 /**
- * 用户 - Entity
+ * Date: 2019/7/9-19:57
  *
- * @author 谭良忠
- * @date 2019/6/19 17:19
+ * @author meng
+ * Description: 组织机构
  */
 @Data
 @ToString
 @Entity
-@Table(name = "sys_user",
-        uniqueConstraints = {@UniqueConstraint(name = "userName", columnNames = "username")})
-public class User {
+@Table(name = "sys_branch",
+        indexes = {
+                @Index(name = "index_sys_branch_parent_id", columnList = "parent_id")
+        })
+public class Branch {
 
     /**
-     * 用户Id
+     * 机构Id
      */
     @TableGenerator(
             name = "ID_GENERATOR",
             table = "sys_sequence",
             pkColumnName = "seq_name",
-            pkColumnValue = "seq_sys_user",
+            pkColumnValue = "seq_sys_branch",
             valueColumnName = "current_value",
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "ID_GENERATOR")
-    @Column(name = "user_id")
-    @Id
-    private Long userId;
-
-    /**
-     * 机构Id
-     */
     @Column(name = "branch_id")
-    private Integer branchId;
+    @Id
+    private Long branchId;
 
     /**
-     * 昵称
+     * 父级Id(最上级为0)
      */
-    @Column(name = "nickname")
-    private String nickname;
+    @Column(name = "parent_id")
+    private Long parentId;
 
     /**
-     * 登录名
+     * 唯一编号
      */
-    @Column(name = "username")
-    private String username;
+    @Column(name = "code")
+    private String code;
 
     /**
-     * 密码
+     * 机构名称
      */
-    @Column(name = "password")
-    private String password;
+    @Column(name = "name")
+    private String name;
 
     /**
-     * 邮箱
-     */
-    @Column(name = "email")
-    private String email;
-
-    /**
-     * 手机
-     */
-    @Column(name = "phone")
-    private String phone;
-
-    /**
-     * 状态值
+     * 状态
      */
     @Column(name = "status")
     private Integer status;

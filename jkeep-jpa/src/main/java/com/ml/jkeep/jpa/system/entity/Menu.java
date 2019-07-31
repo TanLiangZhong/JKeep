@@ -1,5 +1,4 @@
-package com.ml.jkeep.jpa.system.entity.sys;
-
+package com.ml.jkeep.jpa.system.entity;
 
 import lombok.Data;
 import lombok.ToString;
@@ -10,53 +9,77 @@ import java.util.Date;
 
 
 /**
- * Date: 2019/7/9-20:05
+ * 菜单 - Entity
  *
- * @author meng
- * Description: 数据字典列表
+ * @author liangzhong
+ * @date 2019/5/5 21:50
  */
 @Data
 @ToString
 @Entity
-@Table(name = "sys_dict_lst",
+@Table(name = "sys_menu",
         indexes = {
-                @Index(name = "index_sys_dict_lst_dict_id", columnList = "dict_id"),
+                @Index(name = "index_sys_element_parent_id", columnList = "parent_id"),
         })
-public class DictLst {
+public class Menu {
 
     /**
-     * 字典列表Id
+     * 菜单Id
      */
     @TableGenerator(
             name = "ID_GENERATOR",
             table = "sys_sequence",
             pkColumnName = "seq_name",
-            pkColumnValue = "seq_sys_dict_lst",
+            pkColumnValue = "seq_sys_menu",
             valueColumnName = "current_value",
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "ID_GENERATOR")
-    @Column(name = "dict_lst_id")
+    @Column(name = "menu_id")
     @Id
-    private Long dictLstId;
+    private Long menuId;
 
     /**
-     * 字典Id
+     * 父级主键(顶级为0）
      */
-    @Column(name = "dict_id")
-    private Long dictId;
-
-    /**
-     * 字典key值.
-     */
-    @Column(name = "tag")
-    private String tag;
+    @Column(name = "parent_id")
+    private Long parentId;
 
     /**
      * 名称
      */
     @Column(name = "name")
     private String name;
+
+    /**
+     * 链接
+     */
+    @Column(name = "href")
+    private String href;
+
+    /**
+     * 图标
+     */
+    @Column(name = "icon")
+    private String icon;
+
+    /**
+     * 唯一编号.
+     */
+    @Column(name = "code")
+    private String code;
+
+    /**
+     * 是否显示(1显示,0不显示)
+     */
+    @Column(name = "show")
+    private Integer show;
+
+    /**
+     * 排序
+     */
+    @Column(name = "order")
+    private Integer order;
 
     /**
      * 备注
@@ -88,5 +111,11 @@ public class DictLst {
      */
     @Column(name = "updater")
     private Long updater;
+
+    /**
+     * 删除标记
+     */
+    @Column(name = "d_flag")
+    private Byte dFlag;
 
 }

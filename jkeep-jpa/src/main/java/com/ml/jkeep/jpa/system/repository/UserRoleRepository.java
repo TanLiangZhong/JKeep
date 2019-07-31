@@ -1,7 +1,7 @@
 package com.ml.jkeep.jpa.system.repository;
 
-import com.ml.jkeep.common.repository.BaseRepository;
-import com.ml.jkeep.jpa.system.entity.sys.UserRole;
+import com.ml.jkeep.jpa.BaseRepository;
+import com.ml.jkeep.jpa.system.entity.UserRole;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public interface UserRoleRepository extends BaseRepository<UserRole, Long> {
      * 根据用户Id查询
      *
      * @param userId 用户Id
-     * @return  UserRole
+     * @return UserRole
      */
     List<UserRole> findAllByUserId(Long userId);
 

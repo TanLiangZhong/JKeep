@@ -1,7 +1,7 @@
 package com.ml.jkeep.jpa.system.repository;
 
-import com.ml.jkeep.common.repository.BaseRepository;
-import com.ml.jkeep.jpa.system.entity.sys.RoleLink;
+import com.ml.jkeep.jpa.BaseRepository;
+import com.ml.jkeep.jpa.system.entity.RoleLink;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

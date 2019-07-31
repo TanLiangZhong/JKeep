@@ -1,41 +1,56 @@
-package com.ml.jkeep.jpa.system.entity.sys;
+package com.ml.jkeep.jpa.system.entity;
+
 
 import lombok.Data;
 import lombok.ToString;
-import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
 
+
 /**
- * 角色 - Entity
+ * Date: 2019/7/9-20:05
  *
- * @author liangzhong
- * @date 2019/4/18 17:08
+ * @author meng
+ * Description: 数据字典列表
  */
 @Data
 @ToString
 @Entity
-@Table(name = "sys_role",
-        uniqueConstraints = {@UniqueConstraint(name = "name", columnNames = "name")})
-public class Role {
+@Table(name = "sys_dict_lst",
+        indexes = {
+                @Index(name = "index_sys_dict_lst_dict_id", columnList = "dict_id"),
+        })
+public class DictLst {
 
     /**
-     * 角色Id
+     * 字典列表Id
      */
     @TableGenerator(
             name = "ID_GENERATOR",
             table = "sys_sequence",
             pkColumnName = "seq_name",
-            pkColumnValue = "seq_sys_role",
+            pkColumnValue = "seq_sys_dict_lst",
             valueColumnName = "current_value",
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "ID_GENERATOR")
-    @Column(name = "role_id")
+    @Column(name = "dict_lst_id")
     @Id
-    private Long roleId;
+    private Long dictLstId;
+
+    /**
+     * 字典Id
+     */
+    @Column(name = "dict_id")
+    private Long dictId;
+
+    /**
+     * 字典key值.
+     */
+    @Column(name = "tag")
+    private String tag;
 
     /**
      * 名称
@@ -44,21 +59,14 @@ public class Role {
     private String name;
 
     /**
-     * 描述
+     * 备注
      */
-    @Column(name = "describe")
-    private String describe;
-
-    /**
-     * 状态(0-停用 1-启用)
-     */
-    @Column(name = "status")
-    private String status;
+    @Column(name = "remark")
+    private String remark;
 
     /**
      * 创建时间
      */
-    @CreationTimestamp
     @Column(name = "gmt_created", updatable = false)
     private Date gmtCreated;
 
@@ -80,11 +88,5 @@ public class Role {
      */
     @Column(name = "updater")
     private Long updater;
-
-    /**
-     * 删除标记
-     */
-    @Column(name = "d_flag")
-    private Byte dFlag;
 
 }

@@ -1,4 +1,4 @@
-package com.ml.jkeep.common.repository;
+package com.ml.jkeep.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

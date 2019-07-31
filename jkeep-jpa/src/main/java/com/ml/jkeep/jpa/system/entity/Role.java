@@ -1,70 +1,64 @@
-package com.ml.jkeep.jpa.system.entity.sys;
+package com.ml.jkeep.jpa.system.entity;
 
 import lombok.Data;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Date: 2019/7/9-19:57
+ * 角色 - Entity
  *
- * @author meng
- * Description: 组织机构
+ * @author liangzhong
+ * @date 2019/4/18 17:08
  */
 @Data
 @ToString
 @Entity
-@Table(name = "sys_branch",
-        indexes = {
-                @Index(name = "index_sys_branch_parent_id", columnList = "parent_id")
-        })
-public class Branch {
+@Table(name = "sys_role",
+        uniqueConstraints = {@UniqueConstraint(name = "name", columnNames = "name")})
+public class Role {
 
     /**
-     * 机构Id
+     * 角色Id
      */
     @TableGenerator(
             name = "ID_GENERATOR",
             table = "sys_sequence",
             pkColumnName = "seq_name",
-            pkColumnValue = "seq_sys_branch",
+            pkColumnValue = "seq_sys_role",
             valueColumnName = "current_value",
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "ID_GENERATOR")
-    @Column(name = "branch_id")
+    @Column(name = "role_id")
     @Id
-    private Long branchId;
+    private Long roleId;
 
     /**
-     * 父级Id(最上级为0)
-     */
-    @Column(name = "parent_id")
-    private Long parentId;
-
-    /**
-     * 唯一编号
-     */
-    @Column(name = "code")
-    private String code;
-
-    /**
-     * 机构名称
+     * 名称
      */
     @Column(name = "name")
     private String name;
 
     /**
-     * 状态
+     * 描述
+     */
+    @Column(name = "describe")
+    private String describe;
+
+    /**
+     * 状态(0-停用 1-启用)
      */
     @Column(name = "status")
-    private Integer status;
+    private String status;
 
     /**
      * 创建时间
      */
+    @CreationTimestamp
     @Column(name = "gmt_created", updatable = false)
     private Date gmtCreated;
 

@@ -1,7 +1,8 @@
 package com.ml.jkeep.service.system.impl;
 
-import com.ml.jkeep.common.service.impl.BaseServiceImpl;
-import com.ml.jkeep.jpa.system.entity.sys.SysLog;
+import com.ml.jkeep.common.bo.PageBo;
+import com.ml.jkeep.common.vo.PageVo;
+import com.ml.jkeep.jpa.system.entity.SysLog;
 import com.ml.jkeep.jpa.system.repository.SysLogRepository;
 import com.ml.jkeep.service.system.SysLogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,15 @@ import org.springframework.stereotype.Service;
  * @date 2019/7/23 11:02
  */
 @Service
-public class SysLogServiceImpl extends BaseServiceImpl<SysLogRepository, SysLog, Long> implements SysLogService {
+public class SysLogServiceImpl implements SysLogService {
 
     @Autowired
     private SysLogRepository sysLogRepository;
+
+    @Override
+    public PageVo<SysLog> findPage(PageBo<SysLog> pageBo) {
+        return null;
+    }
 
     @Async
     @Override

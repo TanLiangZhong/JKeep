@@ -1,17 +1,19 @@
 package com.ml.jkeep.service.system.impl;
 
+import com.ml.jkeep.common.bo.PageBo;
 import com.ml.jkeep.common.enums.SysEnums;
-import com.ml.jkeep.common.service.impl.BaseServiceImpl;
-import com.ml.jkeep.jpa.system.entity.sys.Role;
-import com.ml.jkeep.jpa.system.entity.sys.RoleLink;
+import com.ml.jkeep.common.vo.PageVo;
+import com.ml.jkeep.jpa.system.entity.Role;
+import com.ml.jkeep.jpa.system.entity.RoleLink;
 import com.ml.jkeep.jpa.system.repository.RoleLinkRepository;
-import com.ml.jkeep.jpa.system.repository.RoleRepository;
 import com.ml.jkeep.service.system.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * 角色 - Impl
@@ -20,10 +22,35 @@ import java.util.List;
  * @date 2019/7/16 17:42
  */
 @Service
-public class RoleServiceImpl extends BaseServiceImpl<RoleRepository, Role, Long> implements RoleService {
+public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleLinkRepository roleLinkRepository;
+
+    @Override
+    public Role save(Role entity) {
+        return null;
+    }
+
+    @Override
+    public Optional<Role> findById(Long id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Role> findAllById(Set<Long> ids) {
+        return null;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
+    }
+
+    @Override
+    public PageVo<Role> findPage(PageBo<Role> pageBo) {
+        return null;
+    }
 
     @Override
     public int batchAddRoleLink(Long roleId, List<Long> linkIds, Byte roleLinkType) {
@@ -39,7 +66,7 @@ public class RoleServiceImpl extends BaseServiceImpl<RoleRepository, Role, Long>
     @Override
     public void batchDeleteRoleLink(List<Long> roleLinkIds) {
         List<RoleLink> roleLinks = new ArrayList<>();
-        roleLinkIds.forEach(roleLinkId ->roleLinks.add(new RoleLink(roleLinkId)));
+        roleLinkIds.forEach(roleLinkId -> roleLinks.add(new RoleLink(roleLinkId)));
         roleLinkRepository.deleteAll(roleLinks);
     }
 }

@@ -1,10 +1,10 @@
 package com.ml.jkeep.service.system.impl;
 
 import com.ml.jkeep.common.constant.CacheKey;
-import com.ml.jkeep.jpa.system.entity.sys.Element;
-import com.ml.jkeep.jpa.system.entity.sys.Menu;
-import com.ml.jkeep.jpa.system.entity.sys.RoleLink;
-import com.ml.jkeep.jpa.system.entity.sys.UserRole;
+import com.ml.jkeep.jpa.system.entity.Element;
+import com.ml.jkeep.jpa.system.entity.Menu;
+import com.ml.jkeep.jpa.system.entity.RoleLink;
+import com.ml.jkeep.jpa.system.entity.UserRole;
 import com.ml.jkeep.jpa.system.repository.ElementRepository;
 import com.ml.jkeep.jpa.system.repository.MenuRepository;
 import com.ml.jkeep.jpa.system.repository.RoleLinkRepository;

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>系统日志</title>
+    <title>角色管理</title>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="renderer" content="webkit">
@@ -18,7 +18,7 @@
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
             <div class="layui-card">
-                <div class="layui-card-header">系统日志</div>
+                <div class="layui-card-header">角色管理</div>
                 <div class="layui-card-body">
                     <table class="layui-hide" id="ml-data"></table>
                 </div>
@@ -45,17 +45,16 @@
         table.render({
             elem: '#ml-data',
             cols: [[
-                {field: 'logId', title: 'ID'},
-                {field: 'username', title: '操作人'},
-                {field: 'modules', title: '模块名称'},
-                {field: 'href', title: '请求地址'},
-                {field: 'operation', title: '用户操作'},
-                {field: 'params', title: '请求参数'},
-                {field: 'method', title: '请求方法'},
-                {field: 'ip', title: 'IP地址'},
-                {field: 'timeConsuming', title: '耗时'}
+                {field: 'roleId', title: 'ID'},
+                {field: 'name', title: '名称'},
+                {field: 'status', title: '状态'},
+                {field: 'describe', title: '描述'},
+                {field: 'creatorName', title: '创建人'},
+                {field: 'gmtCreated', title: '创建时间'},
+                {field: 'updaterName', title: '更新人'},
+                {field: 'gmtModified', title: '更新时间'}
             ]],
-            url: '/system/log/find/page',
+            url: '/system/role/find/page',
             method: 'POST',
             contentType: 'application/json',
             headers: {[_csrf_header]: _csrf},

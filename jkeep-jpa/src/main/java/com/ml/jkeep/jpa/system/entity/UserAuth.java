@@ -1,4 +1,4 @@
-package com.ml.jkeep.jpa.system.entity.sys;
+package com.ml.jkeep.jpa.system.entity;
 
 import com.ml.jkeep.common.constant.Common;
 import com.ml.jkeep.jpa.system.vo.HrefPermissionVo;

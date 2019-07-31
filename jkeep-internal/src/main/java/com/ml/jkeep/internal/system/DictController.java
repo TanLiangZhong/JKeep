@@ -1,10 +1,9 @@
 package com.ml.jkeep.internal.system;
 
 import com.ml.jkeep.common.bo.PageBo;
-import com.ml.jkeep.common.controller.BaseController;
 import com.ml.jkeep.common.vo.RestVo;
-import com.ml.jkeep.jpa.system.entity.sys.Dict;
-import com.ml.jkeep.jpa.system.entity.sys.DictLst;
+import com.ml.jkeep.jpa.system.entity.Dict;
+import com.ml.jkeep.jpa.system.entity.DictLst;
 import com.ml.jkeep.service.system.DictService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("dict")
-public class DictController extends BaseController {
+public class DictController {
 
     @Autowired
     private DictService dictService;
@@ -44,9 +43,9 @@ public class DictController extends BaseController {
         return RestVo.SUCCESS();
     }
 
-    @PostMapping("page")
-    public RestVo<Page<Dict>> page(@RequestBody PageBo<Dict> pageBo) {
-        return RestVo.SUCCESS(dictService.findSimplePage(pageBo));
+    @PostMapping("find/page")
+    public RestVo<Page<Dict>> findPage(@RequestBody PageBo<Dict> pageBo) {
+        return RestVo.SUCCESS(dictService.findPage(pageBo));
     }
 
     @PostMapping("find/lst/{dictId}")

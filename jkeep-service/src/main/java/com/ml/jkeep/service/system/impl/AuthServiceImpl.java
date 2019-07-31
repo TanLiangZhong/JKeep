@@ -1,7 +1,7 @@
 package com.ml.jkeep.service.system.impl;
 
-import com.ml.jkeep.jpa.system.entity.sys.User;
-import com.ml.jkeep.jpa.system.entity.sys.UserAuth;
+import com.ml.jkeep.jpa.system.entity.User;
+import com.ml.jkeep.jpa.system.entity.UserAuth;
 import com.ml.jkeep.jpa.system.repository.UserRepository;
 import com.ml.jkeep.service.system.HrefPermissionService;
 import lombok.extern.slf4j.Slf4j;

@@ -1,9 +1,8 @@
 package com.ml.jkeep.internal.system;
 
 import com.ml.jkeep.common.bo.PageBo;
-import com.ml.jkeep.common.controller.BaseController;
 import com.ml.jkeep.common.vo.RestVo;
-import com.ml.jkeep.jpa.system.entity.sys.SysLog;
+import com.ml.jkeep.jpa.system.entity.SysLog;
 import com.ml.jkeep.service.system.SysLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,26 +16,20 @@ import org.springframework.web.bind.annotation.*;
  */
 @Controller
 @RequestMapping("system/log")
-public class SysLogController extends BaseController {
+public class SysLogController {
 
     @Autowired
     private SysLogService logService;
 
-    @ResponseBody
-    @GetMapping("find/{id}")
-    public RestVo findById(@PathVariable Long id) {
-        return RestVo.SUCCESS(logService.findById(id));
+    @GetMapping("page.html")
+    public String html() {
+        return "views/system/log";
     }
 
     @ResponseBody
     @PostMapping("find/page")
-    public RestVo page(@RequestBody PageBo<SysLog> pageBo) {
-        return RestVo.SUCCESS(logService.findSimplePage(pageBo));
-    }
-
-    @GetMapping("page.html")
-    public String html() {
-        return "views/system/log";
+    public RestVo findPage(@RequestBody PageBo<SysLog> pageBo) {
+        return RestVo.SUCCESS(logService.findPage(pageBo));
     }
 
 }

@@ -1,7 +1,7 @@
 package com.ml.jkeep.internal.auth;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ml.jkeep.jpa.system.entity.sys.UserAuth;
+import com.ml.jkeep.jpa.system.entity.UserAuth;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 

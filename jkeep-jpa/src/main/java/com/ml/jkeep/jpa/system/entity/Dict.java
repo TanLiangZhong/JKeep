@@ -1,4 +1,4 @@
-package com.ml.jkeep.jpa.system.entity.sys;
+package com.ml.jkeep.jpa.system.entity;
 
 import lombok.Data;
 import lombok.ToString;
@@ -7,79 +7,45 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 
-
 /**
- * 菜单 - Entity
+ * Date: 2019/7/9-20:03
  *
- * @author liangzhong
- * @date 2019/5/5 21:50
+ * @author meng
+ * Description: 数据字典
  */
 @Data
 @ToString
 @Entity
-@Table(name = "sys_menu",
-        indexes = {
-                @Index(name = "index_sys_element_parent_id", columnList = "parent_id"),
-        })
-public class Menu {
+@Table(name = "sys_dict")
+public class Dict {
 
     /**
-     * 菜单Id
+     * 字典Id
      */
     @TableGenerator(
             name = "ID_GENERATOR",
             table = "sys_sequence",
             pkColumnName = "seq_name",
-            pkColumnValue = "seq_sys_menu",
+            pkColumnValue = "seq_sys_dict",
             valueColumnName = "current_value",
             allocationSize = 1
     )
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "ID_GENERATOR")
-    @Column(name = "menu_id")
+    @Column(name = "dict_id")
     @Id
-    private Long menuId;
+    private Long dictId;
 
     /**
-     * 父级主键(顶级为0）
+     * 字典key值
      */
-    @Column(name = "parent_id")
-    private Long parentId;
+    @Column(name = "tag")
+    private String tag;
 
     /**
      * 名称
      */
     @Column(name = "name")
     private String name;
-
-    /**
-     * 链接
-     */
-    @Column(name = "href")
-    private String href;
-
-    /**
-     * 图标
-     */
-    @Column(name = "icon")
-    private String icon;
-
-    /**
-     * 唯一编号.
-     */
-    @Column(name = "code")
-    private String code;
-
-    /**
-     * 是否显示(1显示,0不显示)
-     */
-    @Column(name = "show")
-    private Integer show;
-
-    /**
-     * 排序
-     */
-    @Column(name = "order")
-    private Integer order;
 
     /**
      * 备注
@@ -111,11 +77,5 @@ public class Menu {
      */
     @Column(name = "updater")
     private Long updater;
-
-    /**
-     * 删除标记
-     */
-    @Column(name = "d_flag")
-    private Byte dFlag;
 
 }

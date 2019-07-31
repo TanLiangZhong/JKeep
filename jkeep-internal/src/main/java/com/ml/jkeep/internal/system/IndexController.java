@@ -1,6 +1,5 @@
 package com.ml.jkeep.internal.system;
 
-import com.ml.jkeep.common.controller.BaseController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @Controller
 @RequestMapping("/")
-public class IndexController extends BaseController {
+public class IndexController {
 
     @GetMapping
     public String index() {
