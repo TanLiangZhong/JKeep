@@ -104,36 +104,6 @@ public abstract class BaseServiceImpl<R extends BaseRepository<T, ID>, T, ID> im
     }
 
     /**
-     * Deletes the given entities.
-     *
-     * @param entities
-     * @throws IllegalArgumentException in case the given {@link Iterable} is {@literal null}.
-     */
-    @Override
-    public void deleteAll(Iterable<? extends T> entities) {
-        r.deleteAll(entities);
-    }
-
-    /**
-     * Deletes all entities managed by the repository.
-     */
-    @Override
-    public void deleteAll() {
-        r.deleteAll();
-    }
-
-    /**
-     * Returns all entities sorted by the given options.
-     *
-     * @param sort
-     * @return all entities sorted by the given options
-     */
-    @Override
-    public Iterable<T> findAll(Sort sort) {
-        return r.findAll(sort);
-    }
-
-    /**
      * 简单分页查询
      * <p>简单的过滤条件</p>
      *

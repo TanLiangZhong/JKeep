@@ -75,27 +75,6 @@ public interface BaseService<T, ID> {
     void deleteById(ID id);
 
     /**
-     * Deletes the given entities.
-     *
-     * @param entities
-     * @throws IllegalArgumentException in case the given {@link Iterable} is {@literal null}.
-     */
-    void deleteAll(Iterable<? extends T> entities);
-
-    /**
-     * Deletes all entities managed by the repository.
-     */
-    void deleteAll();
-
-    /**
-     * Returns all entities sorted by the given options.
-     *
-     * @param sort
-     * @return all entities sorted by the given options
-     */
-    Iterable<T> findAll(Sort sort);
-
-    /**
      * 简单分页查询
      * <p>简单的过滤条件</p>
      *
