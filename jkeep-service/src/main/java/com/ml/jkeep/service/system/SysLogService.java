@@ -3,6 +3,7 @@ package com.ml.jkeep.service.system;
 
 import com.ml.jkeep.common.bo.PageBo;
 import com.ml.jkeep.common.vo.PageVo;
+import com.ml.jkeep.jpa.system.bo.SysLogSearchBo;
 import com.ml.jkeep.jpa.system.entity.SysLog;
 
 /**
@@ -19,7 +20,7 @@ public interface SysLogService {
      * @param pageBo 分页对象
      * @return {@link PageVo}
      */
-    PageVo<SysLog> findPage(PageBo<SysLog> pageBo);
+    PageVo<SysLog> findPage(PageBo<SysLogSearchBo> pageBo);
 
     /**
      * 新增系统日志

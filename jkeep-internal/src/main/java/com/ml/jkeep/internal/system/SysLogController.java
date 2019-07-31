@@ -2,7 +2,7 @@ package com.ml.jkeep.internal.system;
 
 import com.ml.jkeep.common.bo.PageBo;
 import com.ml.jkeep.common.vo.RestVo;
-import com.ml.jkeep.jpa.system.entity.SysLog;
+import com.ml.jkeep.jpa.system.bo.SysLogSearchBo;
 import com.ml.jkeep.service.system.SysLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +28,7 @@ public class SysLogController {
 
     @ResponseBody
     @PostMapping("find/page")
-    public RestVo findPage(@RequestBody PageBo<SysLog> pageBo) {
+    public RestVo findPage(@RequestBody PageBo<SysLogSearchBo> pageBo) {
         return RestVo.SUCCESS(logService.findPage(pageBo));
     }
 

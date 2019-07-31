@@ -1,6 +1,8 @@
 package com.ml.jkeep.common.vo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,6 +14,8 @@ import java.util.List;
  * @date 2019/7/30 17:10
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PageVo<T> implements Serializable {
 
     /**
