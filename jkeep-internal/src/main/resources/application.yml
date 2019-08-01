@@ -10,9 +10,9 @@ spring:
 #    url: jdbc:mysql://rm-uf6ei0ncf08876co9zo.mysql.rds.aliyuncs.com:3306/jkeep?autoReconnect=true&useUnicode=true&amp&characterEncoding=UTF-8
 #    username: jkeep
 #    password: jkeep2019___
-    url: jdbc:mysql://localhost:3306/jkeep?autoReconnect=true&useUnicode=true&amp&characterEncoding=UTF-8
-    username: root
-    password: my-secret-pw
+    url: jdbc:mysql://rm-uf6ei0ncf08876co9zo.mysql.rds.aliyuncs.com:3306/jkeep?autoReconnect=true&useUnicode=true&amp&characterEncoding=UTF-8
+    username: jkeep
+    password: jkeep2019___
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   #jap 配置
@@ -36,6 +36,14 @@ spring:
   thymeleaf:
     # dev 关闭缓存. OnLine 需改true
     cache: false
+
+# ======= 线程池配置 =======
+jkeep:
+  threadPool:
+    corePoolSize: 200
+    maxPoolSize: 1000
+    queueCapacity: 1000000
+    keepAliveSeconds: 300
 
 # ======= 日志配置 =======
 logging:
