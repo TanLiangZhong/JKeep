@@ -12,7 +12,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @version 1.0
  * @date 2019/06/19
  */
-@EnableAsync
 @EnableCaching
 @SpringBootApplication
 public class JKeepApplication {

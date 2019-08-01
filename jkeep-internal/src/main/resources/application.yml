@@ -7,9 +7,6 @@ spring:
 
   # 指定数据源
   datasource:
-#    url: jdbc:mysql://rm-uf6ei0ncf08876co9zo.mysql.rds.aliyuncs.com:3306/jkeep?autoReconnect=true&useUnicode=true&amp&characterEncoding=UTF-8
-#    username: jkeep
-#    password: jkeep2019___
     url: jdbc:mysql://rm-uf6ei0ncf08876co9zo.mysql.rds.aliyuncs.com:3306/jkeep?autoReconnect=true&useUnicode=true&amp&characterEncoding=UTF-8
     username: jkeep
     password: jkeep2019___
@@ -37,14 +34,6 @@ spring:
     # dev 关闭缓存. OnLine 需改true
     cache: false
 
-# ======= 线程池配置 =======
-jkeep:
-  threadPool:
-    corePoolSize: 200
-    maxPoolSize: 1000
-    queueCapacity: 1000000
-    keepAliveSeconds: 300
-
 # ======= 日志配置 =======
 logging:
   # 日志路径
@@ -59,8 +48,18 @@ logging:
       ml: debug
 
 # ======= JKeep配置 =======
-JKeep:
+jkeep:
+  # 线程池配置
+  threadPool:
+    corePoolSize: 200
+    maxPoolSize: 1000
+    queueCapacity: 1000000
+    keepAliveSeconds: 300
+
+  # 日志
   logAop:
     enable: true
+
+  # 安全认证
   auth:
     token-validity: 7200
