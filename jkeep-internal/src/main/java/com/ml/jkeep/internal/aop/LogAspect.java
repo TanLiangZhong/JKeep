@@ -39,7 +39,7 @@ import java.util.Optional;
 @Slf4j
 @Aspect
 @Component
-@ConditionalOnProperty(prefix = "JKeep.logAop", name = "enable", havingValue = "true")
+@ConditionalOnProperty(prefix = "jkeep.log-aop", name = "enable", havingValue = "true")
 public class LogAspect {
 
     @Autowired

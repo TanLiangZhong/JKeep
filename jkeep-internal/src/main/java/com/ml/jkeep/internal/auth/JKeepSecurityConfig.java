@@ -44,7 +44,7 @@ public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * 令牌有效期秒
      */
-    @Value("${JKeep.auth.token-validity}")
+    @Value("${jkeep.auth.token-validity}")
     private int tokenValidity;
 
     @Override
