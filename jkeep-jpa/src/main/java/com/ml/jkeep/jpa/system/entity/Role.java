@@ -1,6 +1,7 @@
 package com.ml.jkeep.jpa.system.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -17,6 +18,7 @@ import java.util.Date;
 @Data
 @ToString
 @Entity
+@NoArgsConstructor
 @Table(name = "sys_role",
         uniqueConstraints = {@UniqueConstraint(name = "name", columnNames = "name")})
 public class Role {
@@ -87,4 +89,8 @@ public class Role {
     @Column(name = "d_flag")
     private Byte dFlag;
 
+    public Role(Long roleId, Byte dFlag) {
+        this.roleId = roleId;
+        this.dFlag = dFlag;
+    }
 }

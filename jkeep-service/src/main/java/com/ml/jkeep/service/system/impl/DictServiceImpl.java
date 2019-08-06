@@ -5,6 +5,7 @@ import com.ml.jkeep.common.vo.PageVo;
 import com.ml.jkeep.jpa.system.entity.Dict;
 import com.ml.jkeep.jpa.system.entity.DictLst;
 import com.ml.jkeep.jpa.system.repository.DictLstRepository;
+import com.ml.jkeep.jpa.system.repository.DictRepository;
 import com.ml.jkeep.service.system.DictService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,24 +26,27 @@ public class DictServiceImpl implements DictService {
     @Autowired
     private DictLstRepository dictLstRepository;
 
+    @Autowired
+    private DictRepository dictRepository;
+
     @Override
     public Dict save(Dict entity) {
-        return null;
+        return dictRepository.save(entity);
     }
 
     @Override
     public Optional<Dict> findById(Long id) {
-        return Optional.empty();
+        return dictRepository.findById(id);
     }
 
     @Override
     public List<Dict> findAllById(Set<Long> ids) {
-        return null;
+        return dictRepository.findAllById(ids);
     }
 
     @Override
     public void deleteById(Long id) {
-
+        dictRepository.deleteById(id);
     }
 
     @Override

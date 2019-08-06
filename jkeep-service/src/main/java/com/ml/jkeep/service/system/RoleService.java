@@ -3,6 +3,7 @@ package com.ml.jkeep.service.system;
 import com.ml.jkeep.common.bo.PageBo;
 import com.ml.jkeep.common.vo.PageVo;
 import com.ml.jkeep.jpa.system.entity.Role;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +23,7 @@ public interface RoleService {
      * @param entity 角色实体
      * @return 所保存实体
      */
+    @Transactional(rollbackFor = Throwable.class)
     Role save(Role entity);
 
     /**
@@ -65,6 +67,7 @@ public interface RoleService {
      * @author 谭良忠
      * @date 2019/7/23 11:05
      */
+    @Transactional(rollbackFor = Throwable.class)
     int batchAddRoleLink(Long roleId, List<Long> linkIds, Byte roleLinkType);
 
     /**
@@ -74,6 +77,7 @@ public interface RoleService {
      * @author 谭良忠
      * @date 2019/7/23 11:05
      */
+    @Transactional(rollbackFor = Throwable.class)
     void batchDeleteRoleLink(List<Long> roleLinkIds);
 
 

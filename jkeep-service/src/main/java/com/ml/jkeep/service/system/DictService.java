@@ -4,6 +4,7 @@ import com.ml.jkeep.common.bo.PageBo;
 import com.ml.jkeep.common.vo.PageVo;
 import com.ml.jkeep.jpa.system.entity.Dict;
 import com.ml.jkeep.jpa.system.entity.DictLst;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,7 @@ public interface DictService {
      * @param entity 角色实体
      * @return 所保存实体
      */
+    @Transactional(rollbackFor = Throwable.class)
     Dict save(Dict entity);
 
     /**
@@ -46,6 +48,7 @@ public interface DictService {
      *
      * @param id 角色Id
      */
+    @Transactional(rollbackFor = Throwable.class)
     void deleteById(Long id);
 
     /**
@@ -70,5 +73,6 @@ public interface DictService {
      * @param dictLst
      * @return
      */
+    @Transactional(rollbackFor = Throwable.class)
     DictLst saveDictLst(DictLst dictLst);
 }

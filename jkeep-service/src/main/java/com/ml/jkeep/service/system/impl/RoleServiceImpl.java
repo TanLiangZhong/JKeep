@@ -1,11 +1,13 @@
 package com.ml.jkeep.service.system.impl;
 
 import com.ml.jkeep.common.bo.PageBo;
+import com.ml.jkeep.common.enums.DFlagEnum;
 import com.ml.jkeep.common.enums.SysEnums;
 import com.ml.jkeep.common.vo.PageVo;
 import com.ml.jkeep.jpa.system.entity.Role;
 import com.ml.jkeep.jpa.system.entity.RoleLink;
 import com.ml.jkeep.jpa.system.repository.RoleLinkRepository;
+import com.ml.jkeep.jpa.system.repository.RoleRepository;
 import com.ml.jkeep.service.system.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,24 +29,27 @@ public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleLinkRepository roleLinkRepository;
 
+    @Autowired
+    private RoleRepository roleRepository;
+
     @Override
     public Role save(Role entity) {
-        return null;
+        return roleRepository.save(entity);
     }
 
     @Override
     public Optional<Role> findById(Long id) {
-        return Optional.empty();
+        return roleRepository.findById(id);
     }
 
     @Override
     public List<Role> findAllById(Set<Long> ids) {
-        return null;
+        return roleRepository.findAllById(ids);
     }
 
     @Override
     public void deleteById(Long id) {
-
+        roleRepository.save(new Role(id, DFlagEnum.NORMAL.getCode()));
     }
 
     @Override
