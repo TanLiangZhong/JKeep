@@ -153,8 +153,8 @@ public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
         // 忽略请求, 无需鉴权即可访问 ,
-        //                "/api/**", "/login", "/auth", "/error"
-        web.ignoring().antMatchers("/plugins/**", "**.js", "/img/**", "**.css", "/favicon.ico", "/401.html", "/404.html");
+        //                "/api/**", "/error"
+        web.ignoring().antMatchers("/plugins/**", "/favicon.ico", "/401.html", "/404.html");
     }
 
 }
