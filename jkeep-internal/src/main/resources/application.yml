@@ -8,8 +8,8 @@ spring:
   # 指定数据源
   datasource:
     url: jdbc:mysql://139.196.160.176:3306/jkeep?autoReconnect=true&useUnicode=true&amp&characterEncoding=UTF-8
-    username: jkeep
-    password: ___jkeep2019
+    username: root
+    password: ml-mysql
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   #jap 配置

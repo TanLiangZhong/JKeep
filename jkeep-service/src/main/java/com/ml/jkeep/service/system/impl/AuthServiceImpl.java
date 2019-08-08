@@ -44,6 +44,6 @@ public class AuthServiceImpl implements UserDetailsService {
 
     public static void main(String[] args) {
         BCryptPasswordEncoder bpe = new BCryptPasswordEncoder();
-        log.info(bpe.encode("jkeep"));
+        log.info(bpe.encode("JKeep"));
     }
 }
