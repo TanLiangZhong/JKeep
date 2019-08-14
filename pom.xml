@@ -9,6 +9,7 @@
         <module>jkeep-jpa</module>
         <module>jkeep-service</module>
         <module>jkeep-api</module>
+        <module>jkeep-common-http</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

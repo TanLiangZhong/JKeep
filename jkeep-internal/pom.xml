@@ -60,23 +60,13 @@
         </dependency>
 
 
-        <!-- JKeep Begin -->
+        <!-- 子模块之间的引用 Start -->
         <dependency>
             <groupId>com.ml</groupId>
-            <artifactId>jkeep-service</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <artifactId>jkeep-common-http</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.ml</groupId>
-            <artifactId>jkeep-jpa</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ml</groupId>
-            <artifactId>jkeep-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <!-- JKeep End -->
+        <!-- 子模块之间的引用 End -->
 
     </dependencies>
 

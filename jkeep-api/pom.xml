@@ -11,5 +11,14 @@
 
     <artifactId>jkeep-api</artifactId>
 
+    <dependencies>
+        <!-- 子模块之间的引用 Start -->
+        <dependency>
+            <groupId>com.ml</groupId>
+            <artifactId>jkeep-common-http</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <!-- 子模块之间的引用 End -->
+    </dependencies>
 
 </project>
