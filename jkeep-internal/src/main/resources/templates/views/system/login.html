@@ -81,7 +81,8 @@
 
 <script src="/plugins/layui/layui.js"></script>
 
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/plugins/jkeep/axios.min.js"></script>
+<script src="/plugins/jkeep/jkeep-axios.js"></script>
 
 <script>
     layui.use(['form'], function () {
@@ -95,7 +96,7 @@
 
             console.log(obj);
 
-            axios.request({
+            service.request({
                 method: 'POST',
                 url: '/login',
                 params: obj.field,
