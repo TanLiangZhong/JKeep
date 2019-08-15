@@ -76,14 +76,15 @@
 <script src="/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- layui -->
-<script src="/plugins/layui/layui.js"></script>
 <!-- axios -->
 <script src="/plugins/axios/axios.min.js"></script>
-<script src="/plugins/layui-component/fetch.js"></script>
+<!-- layui -->
+<script src="/plugins/layui/layui.js"></script>
 
 <script>
-    layui.use(['form'], function () {
+    layui.extend({
+        fetch: '/plugins/layui-component/fetch' // axios 组件
+    }).use(['form', 'fetch'], function () {
         let form = layui.form, fetch = layui.fetch;
         form.render();
         //提交
