@@ -2,16 +2,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>jkeep</artifactId>
         <groupId>com.ml</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
-
     <artifactId>jkeep-internal</artifactId>
 
     <dependencies>
+        <!-- 子模块之间的引用 Start -->
+        <dependency>
+            <groupId>com.ml</groupId>
+            <artifactId>jkeep-common-http</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <!-- 子模块之间的引用 End -->
         <!-- Spring Begin -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -46,9 +52,7 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>-->
-
         <!-- Spring End -->
-
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity5</artifactId>
@@ -58,16 +62,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-
-
-        <!-- 子模块之间的引用 Start -->
-        <dependency>
-            <groupId>com.ml</groupId>
-            <artifactId>jkeep-common-http</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-        <!-- 子模块之间的引用 End -->
-
     </dependencies>
 
 </project>
