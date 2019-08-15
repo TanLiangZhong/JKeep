@@ -16,8 +16,6 @@
     <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- icheck bootstrap -->
-<!--    <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">-->
     <!-- Theme style -->
     <link rel="stylesheet" href="/plugins/adminLTE/css/adminlte.min.css">
     <!-- Google Font: Source Sans Pro -->
@@ -65,7 +63,7 @@
             </form>
 
             <div class="social-auth-links text-center mb-3">
-                <button class="btn btn-primary btn-block btn-flat" lay-submit lay-filter="login">Sign In</button>
+                <button class="btn btn-primary btn-block btn-flat" lay-submit lay-filter="loginBtn">Sign In</button>
             </div>
             <!-- /.social-auth-links -->
         </div>
@@ -78,36 +76,27 @@
 <script src="/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+<!-- layui -->
 <script src="/plugins/layui/layui.js"></script>
-
-<script src="/plugins/jkeep/axios.min.js"></script>
-<script src="/plugins/jkeep/jkeep-axios.js"></script>
+<!-- axios -->
+<script src="/plugins/axios/axios.min.js"></script>
+<script src="/plugins/layui-component/fetch.js"></script>
 
 <script>
     layui.use(['form'], function () {
-        let $ = layui.$,
-            form = layui.form,
-            _csrf_header = $("meta[name='_csrf_header']").attr("content"),
-            _csrf = $("meta[name='_csrf']").attr("content");
+        let form = layui.form, fetch = layui.fetch;
         form.render();
         //提交
-        form.on('submit(login)', function (obj) {
-
-            console.log(obj);
-
+        form.on('submit(loginBtn)', function (obj) {
             fetch.request({
                 method: 'POST',
                 url: '/login',
                 params: obj.field,
-                headers: {[_csrf_header]: _csrf}
             }).then(resp => {
-                console.log(resp);
-                const data = resp.data;
-                if (data.success) {
-                    window.location.href = "/";
+                if (resp.success) {
+                    // window.location.href = "/";
                 }
-                layer.msg(data.message);
+                layer.msg(resp.message);
             }).catch(error => {
                 console.log(error);
             });
