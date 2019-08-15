@@ -71,14 +71,29 @@ public class RestVo<T> implements Serializable {
 
     public static RestVo FAIL(String msg) {
         RestVo<Object> restVo = new RestVo<>();
-        ResultMsg result = ResultMsg.FAIL;
-        restVo.setCode(result.getCode());
+        restVo.setCode(ResultMsg.FAIL.getCode());
         restVo.setMessage(msg);
         restVo.setSuccess(false);
         return restVo;
     }
 
     public static RestVo FAIL(ResultMsg result) {
+        RestVo<Object> restVo = new RestVo<>();
+        restVo.setCode(result.getCode());
+        restVo.setMessage(result.getName());
+        restVo.setSuccess(false);
+        return restVo;
+    }
+
+    public static RestVo ERRUR(String msg) {
+        RestVo<Object> restVo = new RestVo<>();
+        restVo.setCode(ResultMsg.ERROR.getCode());
+        restVo.setMessage(msg);
+        restVo.setSuccess(false);
+        return restVo;
+    }
+
+    public static RestVo ERRUR(ResultMsg result) {
         RestVo<Object> restVo = new RestVo<>();
         restVo.setCode(result.getCode());
         restVo.setMessage(result.getName());

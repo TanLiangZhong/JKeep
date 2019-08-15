@@ -1,5 +1,6 @@
 /**
- * axios 组件.
+ * axios 组件. https://www.kancloud.cn/yunye/axios/234845
+ * @author liangzhong.tan
  */
 layui.define('layer', exports => {
     let layer = layui.layer;
@@ -26,6 +27,7 @@ layui.define('layer', exports => {
     // 添加响应拦截器
     fetch.interceptors.response.use(response => {
         console.log("Response: ", response);
+        if (!response.data || response.data.code === 'E0000') layer.msg(`Error: ${response.data.message}`);
         // 对响应数据做点什么
         return response.data;
     }, error => {
