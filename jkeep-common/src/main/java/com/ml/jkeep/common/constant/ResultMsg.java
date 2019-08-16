@@ -15,6 +15,7 @@ import lombok.Getter;
 public enum ResultMsg {
 
     SUCCESS("S0000", "操作成功"),
+    ERROR("E0000", "系统异常"),
     FAIL("F0000", "操作失败"),
     LOGIN_FAIL_WRONG_PASSWORD("F0001", "账户名或者密码输入错误!"),
     LOGIN_FAIL_LOCKED("F0002", "账户被锁定,请联系管理员!"),

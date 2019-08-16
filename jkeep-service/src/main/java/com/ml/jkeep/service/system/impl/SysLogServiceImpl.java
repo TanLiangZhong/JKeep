@@ -34,8 +34,14 @@ public class SysLogServiceImpl implements SysLogService {
     @Override
     public PageVo<SysLog> findPage(PageBo<SysLogSearchBo> pageBo) {
         Page<SysLog> page = sysLogRepository.findAll(this.convertSearchParam(pageBo.getParam()),
-                PageRequest.of(pageBo.getPage() - 1, pageBo.getSize(), Sort.Direction.DESC, pageBo.getSortableField()));
+                PageRequest.of(pageBo.getPage() - 1, pageBo.getSize(), Sort.Direction.DESC, pageBo.getSortableFields()));
         return new PageVo<>(pageBo.getPage(), pageBo.getSize(), page.getTotalElements(), page.getTotalPages(), page.getContent());
+    }
+
+    @Async
+    @Override
+    public void insertLog(SysLog log) {
+        sysLogRepository.save(log);
     }
 
     private Specification<SysLog> convertSearchParam(SysLogSearchBo param) {
@@ -55,11 +61,5 @@ public class SysLogServiceImpl implements SysLogService {
             }
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
-    }
-
-    @Async
-    @Override
-    public void insertLog(SysLog log) {
-        sysLogRepository.save(log);
     }
 }

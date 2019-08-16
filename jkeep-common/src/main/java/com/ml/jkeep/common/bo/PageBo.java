@@ -41,5 +41,5 @@ public class PageBo<T> implements Serializable {
     /**
      * 排序字段
      */
-    private String sortableField = "gmtCreated";
+    private String[] sortableFields = {"gmtCreated"};
 }
