@@ -33,7 +33,7 @@ public abstract class BaseServiceImpl<D extends BaseRepository, T> implements Ba
 	public PageVo<T> findPage(PageBo<?> pageBo) {
 		List<Sort.Order> orders = new ArrayList<>();
 		for (String key : pageBo.getOrderby().keySet()){
-			orders.add( new Sort.Order( Sort.Direction.DESC.toString().toLowerCase().equals( pageBo.getOrderby().get(key) ) ? Sort.Direction.DESC : Sort.Direction.ASC , pageBo.getOrderby().get(key)));
+			orders.add( new Sort.Order( Sort.Direction.DESC.toString().toLowerCase().equals( pageBo.getOrderby().get(key) ) ? Sort.Direction.DESC : Sort.Direction.ASC , key ));
 		}
 		PageRequest pageRequest = PageRequest.of(pageBo.getPage() - 1, pageBo.getSize(), Sort.by(orders) );
 		Specification<T> specification = (Specification<T>) (root, query, cb) -> {
