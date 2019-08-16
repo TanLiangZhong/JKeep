@@ -39,7 +39,7 @@ public class PageBo<T> implements Serializable {
     private Map<String,String> orderby = new HashMap<>();
 
     /**
-     * 排序字段
+     * 单参数排序
      */
-    private String[] sortableFields = {"gmtCreated"};
+    private String sortableField;
 }
