@@ -1,8 +1,12 @@
 package com.ml.jkeep.service.system;
 
+import com.ml.jkeep.jpa.system.entity.User;
+
 /**
- * @author 谭良忠
- * @date 2019/6/19 17:19
+ * Date: 2019/8/15-15:10
+ * @author meng
+ * Description:
  */
-public class UserService {
+public interface UserService extends BaseService<User> {
+
 }

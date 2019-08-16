@@ -11,6 +11,10 @@
 	<artifactId>jkeep-common-http</artifactId>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 		<!-- 子模块之间的引用 Start -->
 		<dependency>
 			<groupId>com.ml</groupId>

@@ -3,6 +3,8 @@ package com.ml.jkeep.common.bo;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 分页 - bo
@@ -21,12 +23,20 @@ public class PageBo<T> implements Serializable {
     /**
      * 页码大小
      */
-    private Integer size;
+    private Integer size = 20;
 
     /**
      * 查询参数
      */
     private T param;
+
+    /**
+     * 多个参数排序
+     *
+     * key : createDate
+     * value : desc
+     */
+    private Map<String,String> orderby = new HashMap<>();
 
     /**
      * 排序字段

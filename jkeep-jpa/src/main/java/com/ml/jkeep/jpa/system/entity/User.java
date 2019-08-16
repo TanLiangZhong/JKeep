@@ -62,6 +62,12 @@ public class User {
     private String password;
 
     /**
+     * 姓名
+     */
+    @Column(name = "name")
+    private String name;
+
+    /**
      * 邮箱
      */
     @Column(name = "email")
