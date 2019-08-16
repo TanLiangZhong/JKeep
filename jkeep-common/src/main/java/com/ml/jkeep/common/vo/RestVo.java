@@ -34,7 +34,7 @@ public class RestVo<T> implements Serializable {
     public RestVo() {
         ResultMsg msg = ResultMsg.SUCCESS;
         this.code = msg.getCode();
-        this.message = msg.getName();
+        this.message = msg.getMessage();
     }
 
     public static RestVo SUCCESS() {
@@ -64,7 +64,7 @@ public class RestVo<T> implements Serializable {
         RestVo<Object> restVo = new RestVo<>();
         ResultMsg result = ResultMsg.FAIL;
         restVo.setCode(result.getCode());
-        restVo.setMessage(result.getName());
+        restVo.setMessage(result.getMessage());
         restVo.setSuccess(false);
         return restVo;
     }
@@ -77,10 +77,18 @@ public class RestVo<T> implements Serializable {
         return restVo;
     }
 
+    public static RestVo FAIL(String code,String msg) {
+        RestVo<Object> restVo = new RestVo<>();
+        restVo.setCode(code);
+        restVo.setMessage(msg);
+        restVo.setSuccess(false);
+        return restVo;
+    }
+
     public static RestVo FAIL(ResultMsg result) {
         RestVo<Object> restVo = new RestVo<>();
         restVo.setCode(result.getCode());
-        restVo.setMessage(result.getName());
+        restVo.setMessage(result.getMessage());
         restVo.setSuccess(false);
         return restVo;
     }
@@ -96,7 +104,7 @@ public class RestVo<T> implements Serializable {
     public static RestVo ERRUR(ResultMsg result) {
         RestVo<Object> restVo = new RestVo<>();
         restVo.setCode(result.getCode());
-        restVo.setMessage(result.getName());
+        restVo.setMessage(result.getMessage());
         restVo.setSuccess(false);
         return restVo;
     }

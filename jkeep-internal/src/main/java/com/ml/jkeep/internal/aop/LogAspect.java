@@ -8,9 +8,7 @@ import com.ml.jkeep.jpa.system.entity.SysLog;
 import com.ml.jkeep.jpa.system.entity.UserAuth;
 import com.ml.jkeep.service.system.SysLogService;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -51,7 +49,7 @@ public class LogAspect {
     }
 
     /**
-     * 环绕通知，围绕着方法执行
+     * 环绕通知
      *
      * @param pjp
      * @return
@@ -79,7 +77,7 @@ public class LogAspect {
         }
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         String methodName = pjp.getTarget().getClass().getName() + "." + method.getName();
-        log.info(appendArgs(methodName, pathParam.toString(), JSON.toJSONString(request.getParameterMap()), bodyParam, null));
+        log.info(appendArgs(methodName, request.getRequestURI(), pathParam.toString(), JSON.toJSONString(request.getParameterMap()), bodyParam));
         long begin = System.currentTimeMillis();
         Object result = pjp.proceed();
         Long timeConsuming = System.currentTimeMillis() - begin;
@@ -96,36 +94,20 @@ public class LogAspect {
     }
 
     /**
-     * 异常通知，在方法抛出异常之后
-     *
-     * @param joinPoint
-     * @param e
-     */
-    @AfterThrowing(pointcut = "controllerAspect()", throwing = "e")
-    public void doAfterThrowing(JoinPoint joinPoint, Throwable e) {
-        log.info("AfterThrowing, 方法抛出异常后执行通知，{} , Error: {}", joinPoint, e.getMessage());
-    }
-
-    /**
      * 拼接参数
      *
      * @param method
+     * @param requestURI
      * @param pathParam
      * @param queryParam
      * @param bodyParam
-     * @param e
      * @return
      */
-    private String appendArgs(String method, String pathParam, String queryParam, String bodyParam, Throwable e) {
+    private String appendArgs(String method, String requestURI, String pathParam, String queryParam, String bodyParam) {
         StringBuilder sb = new StringBuilder();
-        if (e == null) {
-            sb.append("\n######################### INFO #########################\n");
-            sb.append("请求方法: ").append(method).append("()\n");
-        } else {
-            sb.append("\n######################### Error #########################\n");
-            sb.append("异常方法: ").append(method).append("()\n");
-            sb.append("异常信息: ").append(e.getMessage()).append("\n");
-        }
+        sb.append("\n######################### INFO #########################\n");
+        sb.append("请求方法: ").append(method).append("()\n");
+        sb.append("请求地址: ").append(requestURI).append("()\n");
         if (!StringUtils.isEmpty(pathParam)) {
             sb.append("请求参数1: ").append(pathParam).append("\n");
         }
@@ -137,64 +119,5 @@ public class LogAspect {
         }
         return sb.toString();
     }
-
-//    /**
-//     * 处理请求参数
-//     *
-//     * @param joinPoint
-//     * @param e
-//     * @return
-//     */
-//    private String handleArgs(JoinPoint joinPoint, Throwable e) {
-//        MethodSignature methodSignature = (MethodSignature) joinPoint.getStaticPart().getSignature();
-//        Method method = methodSignature.getMethod();
-//        Object[] args = joinPoint.getArgs();
-//        Annotation[][] parameterAnnotations = method.getParameterAnnotations();
-//        assert args.length == parameterAnnotations.length;
-//        StringBuilder pathParam = new StringBuilder();
-//        String bodyParam = null;
-//        for (int argIndex = 0; argIndex < args.length; argIndex++) {
-//            for (Annotation annotation : parameterAnnotations[argIndex]) {
-//                if (annotation instanceof PathVariable) {
-//                    if (args[argIndex] != null) {
-//                        pathParam.append(args[argIndex] + "&");
-//                    }
-//                } else if (annotation instanceof RequestBody) {
-//                    bodyParam = JSON.toJSONString(args[argIndex], SerializerFeature.DisableCircularReferenceDetect);
-//                }
-//            }
-//        }
-//        return appendArgs(joinPoint, pathParam.toString(), handleRequestParam(), bodyParam, e);
-//    }
-//
-//    /**
-//     * 处理Request里面参数
-//     *
-//     * @return
-//     */
-//    private String handleRequestParam() {
-//        RequestAttributes ra = RequestContextHolder.getRequestAttributes();
-//        ServletRequestAttributes sra = (ServletRequestAttributes) ra;
-//        HttpServletRequest request = sra.getRequest();
-//        Map<String, String[]> paramsMap = request.getParameterMap();
-//        if (paramsMap != null && paramsMap.size() > 0) {
-//            StringBuilder params = new StringBuilder();
-//            for (Map.Entry<String, String[]> entry : paramsMap.entrySet()) {
-//                String[] values = entry.getValue();
-//                if (values != null) {
-//                    String value;
-//                    if (values.length == 1) {
-//                        value = values[0];
-//                    } else {
-//                        value = JSON.toJSONString(values, SerializerFeature.DisableCircularReferenceDetect);
-//                    }
-//                    params.append(entry.getKey() + "=" + value + "&");
-//                }
-//            }
-//            return params.toString();
-//        }
-//        return null;
-//    }
-
 
 }

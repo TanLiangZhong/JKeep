@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * 结果消息 - Enum
+ * 业务响应状态码信息 - Enum
  *
  * @author liangzhong
  * @date 2019/6/23 16:56
@@ -13,6 +13,10 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum ResultMsg {
+
+    /**
+     * 业务响应状态码信息
+     */
 
     SUCCESS("S0000", "操作成功"),
     ERROR("E0000", "系统异常"),
@@ -26,5 +30,5 @@ public enum ResultMsg {
     ACCESS_DENIED("F0007", "无法访问当前URL");
 
     private String code;
-    private String name;
+    private String message;
 }
