@@ -22,4 +22,11 @@ public interface DictLstRepository extends BaseRepository<DictLst, Long> {
      * @return
      */
     List<DictLst> findAllByDictId(Long dictId);
+
+    /**
+     * 根据字典Id删除数据字典列表
+     *
+     * @param dictId
+     */
+    void deleteAllByDictId(Long dictId);
 }

@@ -21,16 +21,16 @@ public interface DictService {
     /**
      * 保存
      *
-     * @param entity 角色实体
+     * @param entity 字典实体
      * @return 所保存实体
      */
     @Transactional(rollbackFor = Throwable.class)
     Dict save(Dict entity);
 
     /**
-     * 根据角色Id查询
+     * 根据字典Id查询
      *
-     * @param id 角色Id
+     * @param id 字典Id
      * @return id对应的实体
      */
     Optional<Dict> findById(Long id);
@@ -38,15 +38,16 @@ public interface DictService {
     /**
      * 返回具有给定ID的所有类型的实例。
      *
-     * @param ids 角色Ids
+     * @param ids 字典Ids
      * @return ids所对应的实体
      */
     List<Dict> findAllById(Set<Long> ids);
 
     /**
-     * 根据Id删除, 逻辑删除
+     * 根据Id删除
+     * <p>同时删除 DicLst 所关联的数据 </p>
      *
-     * @param id 角色Id
+     * @param id 字典Id
      */
     @Transactional(rollbackFor = Throwable.class)
     void deleteById(Long id);
@@ -75,4 +76,12 @@ public interface DictService {
      */
     @Transactional(rollbackFor = Throwable.class)
     DictLst saveDictLst(DictLst dictLst);
+
+    /**
+     * 删除数据字典列表
+     *
+     * @param dictLstId
+     */
+    @Transactional(rollbackFor = Throwable.class)
+    void deleteDictLst(Long dictLstId);
 }

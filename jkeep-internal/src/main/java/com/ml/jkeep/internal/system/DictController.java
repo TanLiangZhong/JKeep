@@ -57,4 +57,10 @@ public class DictController {
     public RestVo<List<DictLst>> saveDictLst(@RequestBody DictLst dictLst) {
         return RestVo.SUCCESS(dictService.saveDictLst(dictLst));
     }
+
+    @PostMapping("delete/lst/{dictLstId}")
+    public RestVo<List<DictLst>> saveDictLst(@PathVariable Long dictLstId) {
+        dictService.deleteDictLst(dictLstId);
+        return RestVo.SUCCESS();
+    }
 }

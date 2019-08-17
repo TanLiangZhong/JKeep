@@ -47,6 +47,7 @@ public class DictServiceImpl implements DictService {
     @Override
     public void deleteById(Long id) {
         dictRepository.deleteById(id);
+        dictLstRepository.deleteAllByDictId(id);
     }
 
     @Override
@@ -62,5 +63,10 @@ public class DictServiceImpl implements DictService {
     @Override
     public DictLst saveDictLst(DictLst dictLst) {
         return dictLstRepository.save(dictLst);
+    }
+
+    @Override
+    public void deleteDictLst(Long dictLstId) {
+        dictLstRepository.deleteById(dictLstId);
     }
 }
