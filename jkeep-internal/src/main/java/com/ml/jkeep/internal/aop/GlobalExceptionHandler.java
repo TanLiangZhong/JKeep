@@ -1,5 +1,6 @@
 package com.ml.jkeep.internal.aop;
 
+import com.alibaba.fastjson.JSON;
 import com.ml.jkeep.common.constant.ResultMsg;
 import com.ml.jkeep.common.exception.BusinessException;
 import com.ml.jkeep.common.vo.RestVo;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.Iterator;
 
 /**
@@ -49,7 +49,7 @@ public class GlobalExceptionHandler {
      * @return RestVo
      */
     @ExceptionHandler(Exception.class)
-    public RestVo handleException(Exception e, HttpServletRequest request) throws IOException {
+    public RestVo handleException(Exception e, HttpServletRequest request) {
         StringBuilder message = new StringBuilder();
         message.append("\n######################### Error #########################\n");
         message.append("RequestURI: ").append(request.getRequestURI()).append("\n");
@@ -60,7 +60,7 @@ public class GlobalExceptionHandler {
             String name = headerIterator.next();
             message.append("\t").append(name).append(": ").append(request.getHeader(name)).append("\n");
         }
-//        message.append("Request Param: ").append( JSON.toJSONString(request.getParameterMap())).append("\n");
+        message.append("Request Param: ").append(JSON.toJSONString(request.getParameterMap())).append("\n");
 //        String body = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
 //        message.append("Request Body: ").append(body);
         log.info(message.toString(), e);
