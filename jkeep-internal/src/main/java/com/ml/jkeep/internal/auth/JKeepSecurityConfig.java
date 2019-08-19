@@ -1,9 +1,13 @@
 package com.ml.jkeep.internal.auth;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ml.jkeep.common.constant.Common;
 import com.ml.jkeep.common.constant.ResultMsg;
 import com.ml.jkeep.common.vo.RestVo;
+import com.ml.jkeep.jpa.system.entity.SysLog;
+import com.ml.jkeep.jpa.system.entity.UserAuth;
+import com.ml.jkeep.service.system.SysLogService;
 import com.ml.jkeep.service.system.impl.AuthServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +44,8 @@ public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
     private JKeepAccessDecisionManager accessDecisionManager;
     @Autowired
     private JKeepAccessDeniedHandler accessDeniedHandler;
+    @Autowired
+    private SysLogService sysLogService;
 
     /**
      * 令牌有效期秒
@@ -107,6 +113,8 @@ public class JKeepSecurityConfig extends WebSecurityConfigurerAdapter {
                     }
                 })
                 .successHandler((req, resp, auth) -> {
+                    UserAuth user = (UserAuth) auth.getPrincipal();
+                    sysLogService.insertLog(new SysLog(user.getUserId(), user.getUsername(), "system", "/login", "用户登录", JSON.toJSONString(req.getParameterMap()), "login", req.getRemoteAddr(), null));
                     if (req.getHeader(Common.CSRF_TOKEN_KEY) != null) {
                         // Ajax 提交
                         resp.setStatus(HttpServletResponse.SC_OK);

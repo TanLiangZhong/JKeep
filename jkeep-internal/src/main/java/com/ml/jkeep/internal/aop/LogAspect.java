@@ -107,7 +107,7 @@ public class LogAspect {
         StringBuilder sb = new StringBuilder();
         sb.append("\n######################### INFO #########################\n");
         sb.append("请求方法: ").append(method).append("()\n");
-        sb.append("请求地址: ").append(requestURI).append("()\n");
+        sb.append("请求地址: ").append(requestURI).append("\n");
         if (!StringUtils.isEmpty(pathParam)) {
             sb.append("请求参数1: ").append(pathParam).append("\n");
         }
