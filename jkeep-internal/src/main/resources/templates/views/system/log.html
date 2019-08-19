@@ -9,33 +9,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="stylesheet" href="/plugins/layuiadmin/layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="/plugins/layuiadmin/style/admin.css" media="all">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="/plugins/adminLTE/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!-- layui style -->
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css">
 </head>
 <body>
 
-<div class="layui-fluid">
-    <div class="layui-row layui-col-space15">
-        <div class="layui-col-md12">
-            <div class="layui-card">
-                <div class="layui-card-header">系统日志</div>
-                <div class="layui-card-body">
-                    <table class="layui-hide" id="ml-data"></table>
-                </div>
-            </div>
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <ol class="breadcrumb float-sm-left">
+                <li class="breadcrumb-item"><a href="#">主页</a></li>
+                <li class="breadcrumb-item active">系统日志</li>
+            </ol>
         </div>
     </div>
-</div>
+    <!--  /.container-fluid -->
+</section>
+
+<section class="content">
+    <table class="layui-hide" id="ml-data"></table>
+</section>
 
 </body>
 
-<script src="/plugins/layuiadmin/layui/layui.js"></script>
+<!-- layui -->
+<script src="/plugins/layui/layui.js"></script>
+
 <script type="text/javascript" th:inline="none">
-    layui.config({
-        base: '/plugins/layuiadmin/' //静态资源所在路径
-    }).extend({
-        index: 'lib/index' //主入口模块
-    }).use(['index', 'table'], function () {
+    layui.extend({
+        fetch: '/plugins/layui-component/fetch' // axios 组件
+    }).use(['table'], function () {
         let table = layui.table,
             $ = layui.$,
             _csrf_header = $("meta[name='_csrf_header']").attr("content"),

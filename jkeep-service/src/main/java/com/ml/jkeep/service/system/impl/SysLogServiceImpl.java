@@ -34,7 +34,7 @@ public class SysLogServiceImpl implements SysLogService {
     @Override
     public PageVo<SysLog> findPage(PageBo<SysLogSearchBo> pageBo) {
         Page<SysLog> page = sysLogRepository.findAll(this.convertSearchParam(pageBo.getParam()),
-                PageRequest.of(pageBo.getPage() - 1, pageBo.getSize(), Sort.Direction.DESC, pageBo.getSortableField()));
+                PageRequest.of(pageBo.getPage() - 1, pageBo.getSize(), Sort.Direction.DESC, pageBo.getSortableField() == null ? "logId" : pageBo.getSortableField()));
         return new PageVo<>(pageBo.getPage(), pageBo.getSize(), page.getTotalElements(), page.getTotalPages(), page.getContent());
     }
 
