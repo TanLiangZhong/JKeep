@@ -55,26 +55,6 @@ public class JKeepAccessDecisionManager implements AccessDecisionManager {
             throw new AccessDeniedException("用户权限不足, 无法访问!");
         }
 
-//
-//        Iterator<ConfigAttribute> iterator = configAttributes.iterator();
-//        while (iterator.hasNext()) {
-//            ConfigAttribute ca = iterator.next();
-//            // 当前请求需要的权限
-//            String needRole = ca.getAttribute();
-//            log.info("当前请求需要的权限 : {}", needRole);
-//            // 当前用户所具有的权限
-//            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-//            for (GrantedAuthority authority : authorities) {
-//                log.info(" 当前用户所具有的权限: {}", authority.getAuthority());
-//                if (authority.getAuthority().equals(needRole)) {
-//                    return;
-//                }
-//            }
-//        }
-//        log.info("用户权限不足");
-//        throw new AccessDeniedException("权限不足!");
-//
-
     }
 
     @Override
