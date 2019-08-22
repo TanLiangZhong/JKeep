@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 
 /**
  * Date: 2019/8/15-15:11
+ *
  * @author meng
  * Description:
  */
 @Service
-public class UserServiceImpl extends BaseServiceImpl<UserRepository,User> implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<UserRepository, User, Long> implements UserService {
 
-	@Autowired
-	private UserRepository userRepository;
+    @Autowired
+    private UserRepository userRepository;
 
 }

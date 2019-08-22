@@ -7,6 +7,6 @@ import com.ml.jkeep.jpa.system.entity.User;
  * @author meng
  * Description:
  */
-public interface UserService extends BaseService<User> {
+public interface UserService extends BaseService<User,Long> {
 
 }

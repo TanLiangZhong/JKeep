@@ -1,6 +1,7 @@
 package com.ml.jkeep.service.system.impl;
 
 import com.ml.jkeep.common.bo.PageBo;
+import com.ml.jkeep.common.utils.JpaUtils;
 import com.ml.jkeep.common.vo.PageVo;
 import com.ml.jkeep.jpa.system.bo.SysLogSearchBo;
 import com.ml.jkeep.jpa.system.entity.SysLog;
@@ -51,9 +52,10 @@ public class SysLogServiceImpl implements SysLogService {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
             if (!StringUtils.isEmpty(param.getKeyword())) {
-                predicates.add(criteriaBuilder.or(criteriaBuilder.like(root.get("username"), param.getKeyword()),
-                        criteriaBuilder.like(root.get("href"), param.getKeyword()),
-                        criteriaBuilder.like(root.get("method"), param.getKeyword())));
+                String keyword = JpaUtils.addWildcard(param.getKeyword());
+                predicates.add(criteriaBuilder.or(criteriaBuilder.like(root.get("username"), keyword),
+                        criteriaBuilder.like(root.get("href"), keyword),
+                        criteriaBuilder.like(root.get("method"), keyword)));
             }
             if (!StringUtils.isEmpty(param.getBeginTime())) {
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("gmtCreated"), param.getBeginTime()));
