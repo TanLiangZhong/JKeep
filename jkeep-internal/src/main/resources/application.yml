@@ -44,7 +44,12 @@ logging:
     root: info
     org:
       springframework: info
-    com:
+      # 打印 sql 参数.
+      hibernate:
+        type:
+          descriptor:
+            sql:
+              BasicBinder: trace
       ml: debug
 
 # ======= JKeep配置 =======
