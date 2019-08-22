@@ -36,26 +36,76 @@
 </section>
 
 <section class="content">
-    <table class="layui-hide" id="ml-data"></table>
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">关键字</label>
+                <div class="layui-input-inline" style="width: 200px;">
+                    <input type="text" name="keyword" placeholder="操作人/请求地址/请求方法" autocomplete="off"
+                           class="layui-input"/>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">日期</label>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="beginTime" id="beginTime" autocomplete="off" class="layui-input"/>
+                </div>
+                <div class="layui-form-mid">-</div>
+                <div class="layui-input-inline" style="width: 100px;">
+                    <input type="text" name="endTime" id="endTime" autocomplete="off" class="layui-input"/>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button class="layui-btn layui-btn-sm" lay-submit lay-filter="searchBtn">搜索</button>
+            </div>
+        </div>
+    </form>
+    <!-- /. search -->
+
+    <table class="layui-hide" id="data-table"></table>
 </section>
 
 </body>
 
+<!-- axios -->
+<script src="/plugins/axios/axios.min.js"></script>
 <!-- layui -->
 <script src="/plugins/layui/layui.js"></script>
 
 <script type="text/javascript" th:inline="none">
     layui.extend({
         fetch: '/plugins/layui-component/fetch' // axios 组件
-    }).use(['table'], function () {
-        let table = layui.table,
-            $ = layui.$,
+    }).use(['laydate', 'form', 'table'], function () {
+        let $ = layui.$,
+            table = layui.table,
+            form = layui.form,
+            laydate = layui.laydate,
             _csrf_header = $("meta[name='_csrf_header']").attr("content"),
             _csrf = $("meta[name='_csrf']").attr("content");
 
-        //展示已知数据
+        laydate.render({
+            elem: '#beginTime'
+        });
+        laydate.render({
+            elem: '#endTime'
+        });
+
+        //search form
+        form.on('submit(searchBtn)', data => {
+            let param = data.field;
+            table.reload('data-table', {
+                where: {param},
+                page: {
+                    curr: 1
+                }
+            });
+            return false;
+        });
+
+        //Table
         table.render({
-            elem: '#ml-data',
+            id: 'data-table',
+            elem: '#data-table',
             cols: [[
                 {field: 'logId', title: 'ID', width: 80, align: 'center'},
                 {field: 'userId', title: '用户ID', width: 80, align: 'center'},
@@ -66,7 +116,8 @@
                 {field: 'params', title: '请求参数'},
                 {field: 'method', title: '请求方法'},
                 {field: 'ip', title: 'IP地址', width: 120},
-                {field: 'timeConsuming', title: '耗时(ms)', width: 100}
+                {field: 'timeConsuming', title: '耗时(ms)', width: 100},
+                {field: 'gmtCreated', title: '创建时间', width: 150}
             ]],
             url: '/system/log/find/page',
             method: 'POST',
@@ -85,7 +136,6 @@
                 dataName: 'data' //规定数据列表的字段名称，默认：data
             },
             parseData: res => {
-                console.log(res);
                 return {
                     "code": res.code, //解析接口状态
                     "message": res.message, //解析提示文本

@@ -50,14 +50,16 @@ public class SysLogServiceImpl implements SysLogService {
         }
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
-            if (!StringUtils.isEmpty(param.getUsername())) {
-                predicates.add(criteriaBuilder.like(root.get("username"), param.getUsername()));
+            if (!StringUtils.isEmpty(param.getKeyword())) {
+                predicates.add(criteriaBuilder.or(criteriaBuilder.like(root.get("username"), param.getKeyword()),
+                        criteriaBuilder.like(root.get("href"), param.getKeyword()),
+                        criteriaBuilder.like(root.get("method"), param.getKeyword())));
             }
             if (!StringUtils.isEmpty(param.getBeginTime())) {
                 predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("gmtCreated"), param.getBeginTime()));
             }
             if (!StringUtils.isEmpty(param.getEndTime())) {
-                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("gmtCreated"), param.getBeginTime()));
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("gmtCreated"), param.getEndTime()));
             }
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
