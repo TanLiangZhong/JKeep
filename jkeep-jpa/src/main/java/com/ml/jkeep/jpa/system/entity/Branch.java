@@ -59,8 +59,8 @@ public class Branch {
     /**
      * 状态
      */
-    @Column(name = "status")
-    private Integer status;
+    @Column(name = "status", length = 1)
+    private Byte status;
 
     /**
      * 创建时间

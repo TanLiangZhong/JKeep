@@ -41,7 +41,7 @@ public class User {
      * 机构Id
      */
     @Column(name = "branch_id")
-    private Integer branchId;
+    private Long branchId;
 
     /**
      * 昵称
@@ -80,10 +80,10 @@ public class User {
     private String phone;
 
     /**
-     * 状态值
+     * 状态值 ( 0-正常, 1-禁用 )
      */
-    @Column(name = "status")
-    private Integer status;
+    @Column(name = "status", length = 1)
+    private Byte status;
 
     /**
      * 创建时间

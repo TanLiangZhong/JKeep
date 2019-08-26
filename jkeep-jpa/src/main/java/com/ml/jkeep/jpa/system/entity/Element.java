@@ -55,8 +55,8 @@ public class Element {
     /**
      * 类型(0:其他 1:按钮 2:链接)
      */
-    @Column(name = "type")
-    private Integer type;
+    @Column(name = "type", length = 1)
+    private Byte type;
 
     /**
      * 唯一编号. 用于鉴权
@@ -98,7 +98,7 @@ public class Element {
      * 状态(0:无效 1:有效)
      */
     @Column(name = "status")
-    private Integer status;
+    private Byte status;
 
     /**
      * 创建时间

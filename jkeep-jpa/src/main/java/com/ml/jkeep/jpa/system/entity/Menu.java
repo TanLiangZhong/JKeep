@@ -72,14 +72,14 @@ public class Menu {
     /**
      * 是否显示(1显示,0不显示)
      */
-    @Column(name = "show")
-    private Integer show;
+    @Column(name = "show", length = 1)
+    private Byte show;
 
     /**
      * 排序
      */
     @Column(name = "order")
-    private Integer order;
+    private Long order;
 
     /**
      * 备注
