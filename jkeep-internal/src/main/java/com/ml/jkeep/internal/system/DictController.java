@@ -48,7 +48,7 @@ public class DictController {
         return RestVo.SUCCESS(dictService.findPage(pageBo));
     }
 
-    @PostMapping("find/lst/{dictId}")
+    @GetMapping("find/lst/{dictId}")
     public RestVo<List<DictLst>> findDictLst(@PathVariable Long dictId) {
         return RestVo.SUCCESS(dictService.findDictLst(dictId));
     }
@@ -58,7 +58,7 @@ public class DictController {
         return RestVo.SUCCESS(dictService.saveDictLst(dictLst));
     }
 
-    @PostMapping("delete/lst/{dictLstId}")
+    @DeleteMapping("delete/lst/{dictLstId}")
     public RestVo<List<DictLst>> saveDictLst(@PathVariable Long dictLstId) {
         dictService.deleteDictLst(dictLstId);
         return RestVo.SUCCESS();
