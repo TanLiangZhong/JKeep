@@ -5,6 +5,8 @@ import com.ml.jkeep.jpa.system.entity.UserAuth;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.util.Objects;
+
 /**
  * 令牌持有者(身份认证相关信息)
  *
@@ -47,6 +49,15 @@ public class JKeepSecurityContextHolder {
      */
     public static boolean isAuthenticated() {
         return getAuthentication() != null && getAuthentication().isAuthenticated();
+    }
+
+    /**
+     * 获得用户Id
+     *
+     * @return userId
+     */
+    public static Long getUserId() {
+        return Objects.requireNonNull(getUserInfo()).getUserId();
     }
 
     private static Authentication getAuthentication() {

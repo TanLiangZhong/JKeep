@@ -1,6 +1,7 @@
 package com.ml.jkeep.service.system.impl;
 
 import com.ml.jkeep.common.constant.CacheKey;
+import com.ml.jkeep.common.enums.DFlagEnum;
 import com.ml.jkeep.jpa.system.entity.Element;
 import com.ml.jkeep.jpa.system.entity.Menu;
 import com.ml.jkeep.jpa.system.entity.RoleLink;
@@ -60,7 +61,7 @@ public class HrefPermissionServiceImpl implements HrefPermissionService {
             menuIds.add(roleLink.getMenuId());
             elementIds.add(roleLink.getElementId());
         });
-        List<Menu> menuList = menuRepository.findAllByMenuIdIn(menuIds);
+        List<Menu> menuList = menuRepository.findAllByMenuIdInAndDFlag(menuIds, DFlagEnum.NORMAL.getCode());
         List<Element> elementList = elementRepository.findAllByElementIdIn(elementIds);
         Set<HrefPermissionVo> vos = new HashSet<>();
         menuList.forEach(menu -> vos.add(new HrefPermissionVo(menu.getCode(), menu.getHref())));

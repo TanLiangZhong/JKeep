@@ -16,6 +16,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -39,11 +40,11 @@ public class JKeepSecurityMetadataSource implements FilterInvocationSecurityMeta
         String requestUrl = filterInvocation.getRequestUrl();
         Set<HrefPermissionVo> allPer = hrefPermissionService.hrefPermission();
         Set<String> roles = new HashSet<>();
-        for (HrefPermissionVo per : allPer) {
-            if (antPathMatcher.match(per.getHref(), requestUrl)) {
+        allPer.forEach(per -> {
+            if (antPathMatcher.match(Optional.ofNullable(per.getHref()).orElse(""), requestUrl)) {
                 roles.add(per.getCode());
             }
-        }
+        });
         if (!CollectionUtils.isEmpty(roles)) {
             log.info("JKeepSecurityMetadataSource, requestUrl : {}, roles: {}", requestUrl, JSON.toJSONString(roles));
             return SecurityConfig.createList(roles.toArray(new String[0]));

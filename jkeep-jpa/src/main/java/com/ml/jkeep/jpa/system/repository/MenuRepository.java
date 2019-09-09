@@ -19,9 +19,10 @@ public interface MenuRepository extends BaseRepository<Menu, Long> {
     /**
      * 根据主键批量查询
      *
-     * @param menuIds
+     * @param menuIds 菜单Id
+     * @param dFlag   删除标记
      * @return
      */
-    List<Menu> findAllByMenuIdIn(Set<Long> menuIds);
+    List<Menu> findAllByMenuIdInAndDFlag(Set<Long> menuIds, Byte dFlag);
 
 }

@@ -70,7 +70,7 @@ public class Menu {
     private String code;
 
     /**
-     * 是否显示(1显示,0不显示)
+     * 是否显示(1-显示,0-不显示)
      */
     @Column(name = "show", length = 1)
     private Byte show;

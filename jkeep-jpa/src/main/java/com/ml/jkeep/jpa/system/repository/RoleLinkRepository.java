@@ -23,4 +23,14 @@ public interface RoleLinkRepository extends BaseRepository<RoleLink, Long> {
      * @return RoleLink
      */
     List<RoleLink> findAllByRoleIdIn(Set<Long> roleIds);
+
+
+    /**
+     * 根据角色Id查询
+     *
+     * @param roleIds 角色Ids
+     * @param type    类型
+     * @return RoleLink
+     */
+    List<RoleLink> findAllByRoleIdInAndType(Set<Long> roleIds, Byte type);
 }
