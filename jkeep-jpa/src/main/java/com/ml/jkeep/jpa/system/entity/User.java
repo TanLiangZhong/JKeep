@@ -50,6 +50,12 @@ public class User {
     private String nickname;
 
     /**
+     * 头像
+     */
+    @Column(name = "avatar")
+    private String avatar;
+
+    /**
      * 登录名
      */
     @Column(name = "username")
@@ -60,12 +66,6 @@ public class User {
      */
     @Column(name = "password")
     private String password;
-
-    /**
-     * 姓名
-     */
-    @Column(name = "name")
-    private String name;
 
     /**
      * 邮箱

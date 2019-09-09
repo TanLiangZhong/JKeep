@@ -46,6 +46,12 @@ public class Role {
     private String name;
 
     /**
+     * 唯一编号.
+     */
+    @Column(name = "code")
+    private String code;
+
+    /**
      * 描述
      */
     @Column(name = "describe")

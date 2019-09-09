@@ -18,9 +18,34 @@ import java.util.*;
 @Data
 public class UserAuth implements UserDetails {
 
+    /**
+     * 用户Id
+     */
     private Long userId;
+
+    /**
+     * 用户名(登陆名)
+     */
     private String username;
+
+    /**
+     * 密码
+     */
     private String password;
+
+    /**
+     * 昵称
+     */
+    private String nickname;
+
+    /**
+     * 头像
+     */
+    private String avatar;
+
+    /**
+     * 用户可以访问的链接
+     */
     private Set<HrefPermissionVo> hrefPer = new HashSet<>();
 
     @Override
