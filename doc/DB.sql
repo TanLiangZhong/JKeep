@@ -140,12 +140,12 @@ CREATE TABLE `sys_menu`  (
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO `sys_menu` VALUES (1, 0, '系统管理', NULL, 'far fas fa-cog', 'system-manage', 1, 0, '', '2019-09-09 06:23:06', 1, '2019-09-09 06:23:06', 1, 0);
-INSERT INTO `sys_menu` VALUES (2, 1, '用户管理', NULL, NULL, 'system-manage-user', 1, 0, '', '2019-09-09 02:48:54', 1, '2019-09-09 02:48:54', 1, 0);
-INSERT INTO `sys_menu` VALUES (3, 1, '菜单管理', NULL, NULL, 'system-manage-menu', 1, 1, NULL, '2019-09-09 02:52:43', 1, '2019-09-09 02:52:43', 1, 0);
-INSERT INTO `sys_menu` VALUES (4, 1, '角色管理', NULL, NULL, 'system-manage-role', 1, 1, NULL, '2019-09-09 02:52:43', 1, '2019-09-09 02:52:43', 1, 0);
-INSERT INTO `sys_menu` VALUES (5, 1, '字典管理', NULL, NULL, 'system-manage-dict', 1, 1, NULL, '2019-09-09 02:52:43', 1, '2019-09-09 02:52:43', 1, 0);
-INSERT INTO `sys_menu` VALUES (6, 1, '系统日志', '/system/log/page.html', NULL, 'system-manage-log', 1, 1, NULL, '2019-09-09 03:33:49', 1, '2019-09-09 03:33:49', 1, 0);
+INSERT INTO `sys_menu` VALUES (1, 0, '系统管理', NULL, 'far fas fa-cog', 'system-manage', 1, 0, '', '2019-09-09 06:23:06', 1, '2019-09-09 06:23:06', 1, 1);
+INSERT INTO `sys_menu` VALUES (2, 1, '用户管理', NULL, NULL, 'system-manage-user', 1, 0, '', '2019-09-09 02:48:54', 1, '2019-09-09 02:48:54', 1, 1);
+INSERT INTO `sys_menu` VALUES (3, 1, '菜单管理', NULL, NULL, 'system-manage-menu', 1, 1, NULL, '2019-09-09 02:52:43', 1, '2019-09-09 02:52:43', 1, 1);
+INSERT INTO `sys_menu` VALUES (4, 1, '角色管理', NULL, NULL, 'system-manage-role', 1, 1, NULL, '2019-09-09 02:52:43', 1, '2019-09-09 02:52:43', 1, 1);
+INSERT INTO `sys_menu` VALUES (5, 1, '字典管理', NULL, NULL, 'system-manage-dict', 1, 1, NULL, '2019-09-09 02:52:43', 1, '2019-09-09 02:52:43', 1, 1);
+INSERT INTO `sys_menu` VALUES (6, 1, '系统日志', '/system/log/page.html', NULL, 'system-manage-log', 1, 1, NULL, '2019-09-09 03:33:49', 1, '2019-09-09 03:33:49', 1, 1);
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -169,7 +169,7 @@ CREATE TABLE `sys_role`  (
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES (1, '系统管理员', 'system-manage', NULL, '1', '2019-09-09 08:02:59', 1, '2019-09-09 08:02:59', 1, 0);
+INSERT INTO `sys_role` VALUES (1, '系统管理员', 'system-manage', NULL, '1', '2019-09-09 08:02:59', 1, '2019-09-09 08:02:59', 1, 1);
 
 -- ----------------------------
 -- Table structure for sys_role_link
@@ -248,8 +248,8 @@ CREATE TABLE `sys_user`  (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 1, '以梅佐酒', '/plugins/adminLTE/img/user3-128x128.jpg', 'Jkeep', '$2a$10$OkhbU26I868z0DSiza3Zi.cC5ibvaHesuSthE1x0AQhPqgHmGCRve', 'liangzhong.tan@outlook.com', '15111213963', 0, '2019-09-09 07:56:52', 1, '2019-07-30 11:21:10', 1, 0);
-INSERT INTO `sys_user` VALUES (2, 1, '玉藻前', '/plugins/adminLTE/img/user3-128x128.jpg', 'admin', '$10$OkhbU26I868z0DSiza3Zi.cC5ibvaHesuSthE1x0AQhPqgHmGCRve', 'liangzhong.tan@outlook.com', '15111213963', 0, '2019-09-09 08:05:27', 1, '2019-09-09 16:05:10', 1, 0);
+INSERT INTO `sys_user` VALUES (1, 1, '以梅佐酒', '/plugins/adminLTE/img/user3-128x128.jpg', 'Jkeep', '$2a$10$OkhbU26I868z0DSiza3Zi.cC5ibvaHesuSthE1x0AQhPqgHmGCRve', 'liangzhong.tan@outlook.com', '15111213963', 0, '2019-09-09 07:56:52', 1, '2019-07-30 11:21:10', 1, 1);
+INSERT INTO `sys_user` VALUES (2, 1, '玉藻前', '/plugins/adminLTE/img/user3-128x128.jpg', 'admin', '$10$OkhbU26I868z0DSiza3Zi.cC5ibvaHesuSthE1x0AQhPqgHmGCRve', 'liangzhong.tan@outlook.com', '15111213963', 0, '2019-09-09 08:05:27', 1, '2019-09-09 16:05:10', 1, 1);
 
 -- ----------------------------
 -- Table structure for sys_user_role
