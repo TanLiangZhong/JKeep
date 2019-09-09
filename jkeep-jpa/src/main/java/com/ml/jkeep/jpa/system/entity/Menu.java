@@ -113,7 +113,7 @@ public class Menu {
     private Long updater;
 
     /**
-     * 删除标记
+     * 删除标记 (1-正常 0-删除)
      */
     @Column(name = "d_flag")
     private Byte dFlag;

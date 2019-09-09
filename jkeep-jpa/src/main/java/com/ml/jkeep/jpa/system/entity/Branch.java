@@ -57,7 +57,7 @@ public class Branch {
     private String name;
 
     /**
-     * 状态
+     * 状态 (1-启用 0-禁用)
      */
     @Column(name = "status", length = 1)
     private Byte status;
@@ -88,7 +88,7 @@ public class Branch {
     private Long updater;
 
     /**
-     * 删除标记
+     * 删除标记 (1-正常 0-删除)
      */
     @Column(name = "d_flag")
     private Byte dFlag;

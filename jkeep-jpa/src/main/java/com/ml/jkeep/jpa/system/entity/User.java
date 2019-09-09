@@ -80,7 +80,7 @@ public class User {
     private String phone;
 
     /**
-     * 状态值 ( 0-正常, 1-禁用 )
+     * 状态值 ( 1-正常, 0-禁用 )
      */
     @Column(name = "status", length = 1)
     private Byte status;
@@ -111,7 +111,7 @@ public class User {
     private Long updater;
 
     /**
-     * 删除标记
+     * 删除标记 (1-正常 0-删除)
      */
     @Column(name = "d_flag")
     private Byte dFlag;
