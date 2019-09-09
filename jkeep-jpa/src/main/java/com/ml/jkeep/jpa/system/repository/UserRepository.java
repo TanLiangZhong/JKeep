@@ -14,9 +14,10 @@ public interface UserRepository extends BaseRepository<User, Long> {
     /**
      * 根据用户名查询
      *
-     * @param username
+     * @param username 用户名
+     * @param dFlag    删除标记
      * @return
      */
-    User findByUsername(String username);
+    User findByUsernameAndDFlag(String username, Byte dFlag);
 
 }

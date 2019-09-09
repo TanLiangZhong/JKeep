@@ -1,5 +1,6 @@
 package com.ml.jkeep.service.system.impl;
 
+import com.ml.jkeep.common.enums.DFlagEnum;
 import com.ml.jkeep.jpa.system.entity.User;
 import com.ml.jkeep.jpa.system.entity.UserAuth;
 import com.ml.jkeep.jpa.system.repository.UserRepository;
@@ -31,13 +32,13 @@ public class AuthServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("loadUserByUsername, username: {}", username);
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsernameAndDFlag(username, DFlagEnum.NORMAL.getCode());
         if (user == null) {
             log.error("用户名不存在, {}", username);
             throw new UsernameNotFoundException("请输入正确的用户名");
         }
         UserAuth userAuth = new UserAuth();
-        BeanUtils.copyProperties(user,userAuth);
+        BeanUtils.copyProperties(user, userAuth);
         userAuth.setHrefPer(hrefPermissionService.hrefPermission(user.getUserId()));
         return userAuth;
     }
