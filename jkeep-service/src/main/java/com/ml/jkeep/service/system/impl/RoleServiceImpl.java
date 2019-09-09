@@ -3,15 +3,25 @@ package com.ml.jkeep.service.system.impl;
 import com.ml.jkeep.common.bo.PageBo;
 import com.ml.jkeep.common.enums.DFlagEnum;
 import com.ml.jkeep.common.enums.SysEnums;
+import com.ml.jkeep.common.utils.JpaUtils;
 import com.ml.jkeep.common.vo.PageVo;
+import com.ml.jkeep.jpa.system.bo.RoleSearchBo;
+import com.ml.jkeep.jpa.system.bo.SysLogSearchBo;
 import com.ml.jkeep.jpa.system.entity.Role;
 import com.ml.jkeep.jpa.system.entity.RoleLink;
+import com.ml.jkeep.jpa.system.entity.SysLog;
 import com.ml.jkeep.jpa.system.repository.RoleLinkRepository;
 import com.ml.jkeep.jpa.system.repository.RoleRepository;
 import com.ml.jkeep.service.system.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -53,8 +63,10 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public PageVo<Role> findPage(PageBo<Role> pageBo) {
-        return null;
+    public PageVo<Role> findPage(PageBo<RoleSearchBo> pageBo) {
+        Page<Role> page = roleRepository.findAll(convertSearchParam(pageBo.getParam()),
+                PageRequest.of(pageBo.getPage() - 1, pageBo.getSize(), Sort.Direction.DESC, Optional.ofNullable(pageBo.getSortableField()).orElse("roleId")));
+        return new PageVo<>(pageBo.getPage(), pageBo.getSize(), page.getTotalElements(), page.getTotalPages(), page.getContent());
     }
 
     @Override
@@ -73,5 +85,20 @@ public class RoleServiceImpl implements RoleService {
         List<RoleLink> roleLinks = new ArrayList<>();
         roleLinkIds.forEach(roleLinkId -> roleLinks.add(new RoleLink(roleLinkId)));
         roleLinkRepository.deleteAll(roleLinks);
+    }
+
+    private Specification<Role> convertSearchParam(RoleSearchBo param) {
+        if (param == null) {
+            return null;
+        }
+        return (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            if (!StringUtils.isEmpty(param.getKeyword())) {
+                String keyword = JpaUtils.addWildcard(param.getKeyword());
+                predicates.add(criteriaBuilder.or(criteriaBuilder.like(root.get("name"), keyword),
+                        criteriaBuilder.like(root.get("code"), keyword)));
+            }
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+        };
     }
 }

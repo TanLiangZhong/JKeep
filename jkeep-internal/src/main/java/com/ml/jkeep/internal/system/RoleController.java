@@ -2,6 +2,7 @@ package com.ml.jkeep.internal.system;
 
 import com.ml.jkeep.common.bo.PageBo;
 import com.ml.jkeep.common.vo.RestVo;
+import com.ml.jkeep.jpa.system.bo.RoleSearchBo;
 import com.ml.jkeep.jpa.system.entity.Role;
 import com.ml.jkeep.service.system.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class RoleController {
 
     @ResponseBody
     @PostMapping("find/page")
-    public RestVo findPage(@RequestBody PageBo<Role> pageBo) {
+    public RestVo findPage(@RequestBody PageBo<RoleSearchBo> pageBo) {
         return RestVo.SUCCESS(roleService.findPage(pageBo));
     }
 

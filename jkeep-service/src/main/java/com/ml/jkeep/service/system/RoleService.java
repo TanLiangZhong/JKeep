@@ -2,6 +2,7 @@ package com.ml.jkeep.service.system;
 
 import com.ml.jkeep.common.bo.PageBo;
 import com.ml.jkeep.common.vo.PageVo;
+import com.ml.jkeep.jpa.system.bo.RoleSearchBo;
 import com.ml.jkeep.jpa.system.entity.Role;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,7 +56,7 @@ public interface RoleService {
      * @param pageBo 分页对象
      * @return {@link PageVo}
      */
-    PageVo<Role> findPage(PageBo<Role> pageBo);
+    PageVo<Role> findPage(PageBo<RoleSearchBo> pageBo);
 
     /**
      * 批量添加 角色关联

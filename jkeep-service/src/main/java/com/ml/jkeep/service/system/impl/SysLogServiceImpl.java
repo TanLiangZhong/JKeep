@@ -19,6 +19,7 @@ import org.springframework.util.StringUtils;
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 系统日志
@@ -35,7 +36,7 @@ public class SysLogServiceImpl implements SysLogService {
     @Override
     public PageVo<SysLog> findPage(PageBo<SysLogSearchBo> pageBo) {
         Page<SysLog> page = sysLogRepository.findAll(this.convertSearchParam(pageBo.getParam()),
-                PageRequest.of(pageBo.getPage() - 1, pageBo.getSize(), Sort.Direction.DESC, pageBo.getSortableField() == null ? "logId" : pageBo.getSortableField()));
+                PageRequest.of(pageBo.getPage() - 1, pageBo.getSize(), Sort.Direction.DESC, Optional.ofNullable(pageBo.getSortableField()).orElse("logId")));
         return new PageVo<>(pageBo.getPage(), pageBo.getSize(), page.getTotalElements(), page.getTotalPages(), page.getContent());
     }
 
