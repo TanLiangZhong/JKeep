@@ -62,20 +62,12 @@
 <script type="text/javascript" th:inline="none">
     layui.extend({
         fetch: '/plugins/layui-component/fetch' // axios 组件
-    }).use(['laydate', 'form', 'table'], function () {
+    }).use(['form', 'table'], function () {
         let $ = layui.$,
             table = layui.table,
             form = layui.form,
-            laydate = layui.laydate,
             _csrf_header = $("meta[name='_csrf_header']").attr("content"),
             _csrf = $("meta[name='_csrf']").attr("content");
-
-        laydate.render({
-            elem: '#beginTime'
-        });
-        laydate.render({
-            elem: '#endTime'
-        });
 
         //search form
         form.on('submit(searchBtn)', data => {
@@ -95,9 +87,10 @@
             elem: '#data-table',
             cols: [[
                 {field: 'roleId', title: 'ID', width: 80, align: 'center'},
-                {field: 'code', title: '编号'},
-                {field: 'name', title: '名称'},
+                {field: 'code', title: '编号', width: 150},
+                {field: 'name', title: '名称', width: 150},
                 {field: 'status', title: '状态', width: 150},
+                {field: 'describe', title: '描述'},
                 {field: 'gmtCreated', title: '创建时间', width: 150}
             ]],
             url: '/system/role/find/page',
