@@ -49,7 +49,9 @@ public class JKeepAccessDecisionManager implements AccessDecisionManager {
         // configAttributes 可以访问 url 的角色
         // authentication.getAuthorities() 用户所有角色
         List<GrantedAuthority> isPermission = new ArrayList<>();
-        configAttributes.forEach(configAttribute -> isPermission.addAll(authentication.getAuthorities().stream().filter(authority -> authority.getAuthority().equals(configAttribute.getAttribute())).collect(Collectors.toList())));
+        configAttributes.forEach(configAttribute -> isPermission.addAll(authentication.getAuthorities().stream().filter(
+                authority -> authority.getAuthority().equals(configAttribute.getAttribute())
+        ).collect(Collectors.toList())));
         if (isPermission.isEmpty()) {
             log.info("用户权限不足, 无法访问!");
             throw new AccessDeniedException("用户权限不足, 无法访问!");
