@@ -1,6 +1,8 @@
 /**
  * axios 组件. https://www.kancloud.cn/yunye/axios/234845
+ *
  * @author liangzhong.tan
+ * @date 2019-9-12 16:28:25
  */
 layui.define('layer', exports => {
     let layer = layui.layer;

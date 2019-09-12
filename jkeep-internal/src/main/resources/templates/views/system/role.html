@@ -61,11 +61,12 @@
 
 <script type="text/javascript" th:inline="none">
     layui.extend({
-        fetch: '/plugins/layui-component/fetch' // axios 组件
-    }).use(['form', 'table'], function () {
+        moment: '/plugins/layui-component/moment' // moment 组件
+    }).use(['moment','form', 'table'], function () {
         let $ = layui.$,
             table = layui.table,
             form = layui.form,
+            moment = layui.moment,
             _csrf_header = $("meta[name='_csrf_header']").attr("content"),
             _csrf = $("meta[name='_csrf']").attr("content");
 
@@ -89,9 +90,11 @@
                 {field: 'roleId', title: 'ID', width: 80, align: 'center'},
                 {field: 'code', title: '编号', width: 150},
                 {field: 'name', title: '名称', width: 150},
-                {field: 'status', title: '状态', width: 150},
+                {
+                    field: 'status', title: '状态', width: 150, templet: d => d.status === 1 ? '启用' : '禁用'
+                },
                 {field: 'describe', title: '描述'},
-                {field: 'gmtCreated', title: '创建时间', width: 150}
+                {field: 'gmtCreated', title: '创建时间', width: 200, templet: d=> moment(d.gmtCreated).format('YYYY-MM-DD HH:mm:ss')}
             ]],
             url: '/system/role/find/page',
             method: 'POST',
