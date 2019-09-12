@@ -6,14 +6,12 @@ import com.ml.jkeep.common.enums.SysEnums;
 import com.ml.jkeep.common.utils.JpaUtils;
 import com.ml.jkeep.common.vo.PageVo;
 import com.ml.jkeep.jpa.system.bo.RoleSearchBo;
-import com.ml.jkeep.jpa.system.bo.SysLogSearchBo;
 import com.ml.jkeep.jpa.system.entity.Role;
 import com.ml.jkeep.jpa.system.entity.RoleLink;
-import com.ml.jkeep.jpa.system.entity.SysLog;
 import com.ml.jkeep.jpa.system.repository.RoleLinkRepository;
 import com.ml.jkeep.jpa.system.repository.RoleRepository;
 import com.ml.jkeep.service.system.RoleService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -34,13 +32,11 @@ import java.util.Set;
  * @date 2019/7/16 17:42
  */
 @Service
+@RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {
 
-    @Autowired
-    private RoleLinkRepository roleLinkRepository;
-
-    @Autowired
-    private RoleRepository roleRepository;
+    private final RoleLinkRepository roleLinkRepository;
+    private final RoleRepository roleRepository;
 
     @Override
     public Role save(Role entity) {
@@ -93,6 +89,7 @@ public class RoleServiceImpl implements RoleService {
         }
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
+            predicates.add(criteriaBuilder.equal(root.get("dFlag"), DFlagEnum.NORMAL.getCode()));
             if (!StringUtils.isEmpty(param.getKeyword())) {
                 String keyword = JpaUtils.addWildcard(param.getKeyword());
                 predicates.add(criteriaBuilder.or(criteriaBuilder.like(root.get("name"), keyword),
