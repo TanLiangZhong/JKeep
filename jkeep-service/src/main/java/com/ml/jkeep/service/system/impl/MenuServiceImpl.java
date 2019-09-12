@@ -1,5 +1,6 @@
 package com.ml.jkeep.service.system.impl;
 
+import com.ml.jkeep.common.constant.CacheKey;
 import com.ml.jkeep.common.enums.DFlagEnum;
 import com.ml.jkeep.common.enums.SysEnums;
 import com.ml.jkeep.jpa.system.entity.Menu;
@@ -13,6 +14,7 @@ import com.ml.jkeep.service.system.MenuService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -34,6 +36,7 @@ public class MenuServiceImpl implements MenuService {
     private final MenuRepository menuRepository;
 
     @Override
+    @Cacheable(cacheNames = CacheKey.USER_MENU, key = "T(com.ml.jkeep.common.constant.CacheKey).USER_MENU+#userId")
     public List<MenuVo> getTree(Long userId) {
         if (userId == null) {
             return Collections.emptyList();

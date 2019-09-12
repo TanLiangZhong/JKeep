@@ -8,7 +8,14 @@ package com.ml.jkeep.common.constant;
  */
 public class CacheKey {
 
-    public final static String HREF_PERMISSION_NAME = "HREF_PERMISSION_NAME";
-    public final static String ALL_HREF_PERMISSION_KEY = "ALL_HREF_PERMISSION_KEY";
+    /**
+     * href 权限
+     */
+    public final static String HREF_PERMISSION = "HREF_PERMISSION_";
+
+    /**
+     * 用户菜单
+     */
+    public final static String USER_MENU = "USER:MENU_";
 
 }

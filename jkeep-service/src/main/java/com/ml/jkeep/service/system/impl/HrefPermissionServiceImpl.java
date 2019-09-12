@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@CacheConfig(cacheNames = CacheKey.HREF_PERMISSION_NAME)
+@CacheConfig(cacheNames = CacheKey.HREF_PERMISSION)
 public class HrefPermissionServiceImpl implements HrefPermissionService {
 
     private final UserRoleRepository userRoleRepository;
@@ -40,13 +40,13 @@ public class HrefPermissionServiceImpl implements HrefPermissionService {
     private final MenuRepository menuRepository;
 
     @Override
-    @Cacheable(key = "T(com.ml.jkeep.common.constant.CacheKey).ALL_HREF_PERMISSION_KEY+#userId")
+    @Cacheable(key = "T(com.ml.jkeep.common.constant.CacheKey).HREF_PERMISSION+#userId")
     public Set<HrefPermissionVo> hrefPermission(Long userId) {
         return this.convert(roleLinkRepository.findAllByRoleIdIn(Optional.ofNullable(userRoleRepository.findAllByUserId(userId)).orElse(new ArrayList<>()).stream().map(UserRole::getRoleId).collect(Collectors.toSet())));
     }
 
     @Override
-    @Cacheable(key = "T(com.ml.jkeep.common.constant.CacheKey).ALL_HREF_PERMISSION_KEY")
+    @Cacheable(key = "T(com.ml.jkeep.common.constant.CacheKey).HREF_PERMISSION")
     public Set<HrefPermissionVo> hrefPermission() {
         return this.convert(roleLinkRepository.findAll());
     }
