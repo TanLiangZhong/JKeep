@@ -49,7 +49,7 @@ public class MenuVo {
     /**
      * 是否显示(1-显示,0-不显示)
      */
-    private Integer show;
+    private Byte show;
 
     private List<MenuVo> children;
 }

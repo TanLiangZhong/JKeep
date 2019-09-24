@@ -74,12 +74,13 @@
 
 <script type="text/javascript" th:inline="none">
     layui.extend({
-        fetch: '/plugins/layui-component/fetch' // axios 组件
+        moment: '/plugins/layui-component/moment' // moment 组件
     }).use(['laydate', 'form', 'table'], function () {
         let $ = layui.$,
             table = layui.table,
             form = layui.form,
             laydate = layui.laydate,
+            moment = layui.moment,
             _csrf_header = $("meta[name='_csrf_header']").attr("content"),
             _csrf = $("meta[name='_csrf']").attr("content");
 
@@ -117,7 +118,12 @@
                 {field: 'method', title: '请求方法'},
                 {field: 'ip', title: 'IP地址', width: 120},
                 {field: 'timeConsuming', title: '耗时(ms)', width: 100},
-                {field: 'gmtCreated', title: '创建时间', width: 150}
+                {
+                    field: 'gmtCreated',
+                    title: '创建时间',
+                    width: 200,
+                    templet: d => moment(d.gmtCreated).format('YYYY-MM-DD HH:mm:ss')
+                }
             ]],
             url: '/system/log/find/page',
             method: 'POST',
