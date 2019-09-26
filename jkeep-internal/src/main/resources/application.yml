@@ -68,3 +68,13 @@ jkeep:
   # 安全认证
   auth:
     token-validity: 7200
+
+  # ali oss
+  oss:
+    accessKeyId: LTAI4FfJAv7wLdint5kdU48M
+    accessKeySecret: mOAULf9oYBGq838wwWjCmUHf8cNnLX
+    roleArn: acs:ram::1887307779349821:role/jkeep
+    roleSessionName: JKeep-Ram
+    endpoint: oss-cn-shanghai.aliyuncs.com
+    bucket: jkeep
+    catalog: upload/
