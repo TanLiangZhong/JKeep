@@ -2,6 +2,7 @@ package com.ml.jkeep.jpa.system.repository;
 
 import com.ml.jkeep.jpa.BaseRepository;
 import com.ml.jkeep.jpa.system.entity.Role;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,4 +14,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RoleRepository extends BaseRepository<Role, Long> {
 
+    /**
+     * 按Id删除 (逻辑删除)
+     *
+     * @param dFlag  删除标记
+     * @param roleId 主键
+     */
+    @Query("update Role set dFlag = ?1 where roleId = ?2")
+    void deleteById(Byte dFlag, Long roleId);
 }

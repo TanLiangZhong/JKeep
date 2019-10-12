@@ -55,7 +55,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void deleteById(Long id) {
-        roleRepository.save(new Role(id, DFlagEnum.NORMAL.getCode()));
+        roleRepository.deleteById(DFlagEnum.NORMAL.getCode(), id);
     }
 
     @Override
