@@ -33,6 +33,10 @@ spring:
   thymeleaf:
     # dev 关闭缓存. OnLine 需改true
     cache: false
+  mvc:
+    favicon:
+      enabled: false
+
 
 # ======= 日志配置 =======
 logging:
