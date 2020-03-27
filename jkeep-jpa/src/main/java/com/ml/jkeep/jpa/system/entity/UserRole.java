@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 /**
@@ -56,6 +56,6 @@ public class UserRole {
      * null
      */
     @Column(name = "gmt_created", updatable = false)
-    private Date gmtCreated;
+    private LocalDateTime gmtCreated;
 
 }

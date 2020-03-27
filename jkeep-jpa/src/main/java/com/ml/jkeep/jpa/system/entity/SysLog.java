@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 
 /**
@@ -96,7 +96,7 @@ public class SysLog {
      */
     @CreationTimestamp
     @Column(name = "gmt_created", updatable = false)
-    private Date gmtCreated;
+    private LocalDateTime gmtCreated;
 
     public SysLog(Long userId, String username, String modules, String href, String operation, String params, String method, String ip, Long timeConsuming) {
         this.userId = userId;

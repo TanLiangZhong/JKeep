@@ -5,7 +5,7 @@ import lombok.ToString;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Date: 2019/7/9-19:57
@@ -66,7 +66,7 @@ public class Branch {
      * 创建时间
      */
     @Column(name = "gmt_created", updatable = false)
-    private Date gmtCreated;
+    private LocalDateTime gmtCreated;
 
     /**
      * 创建人
@@ -79,7 +79,7 @@ public class Branch {
      */
     @UpdateTimestamp
     @Column(name = "gmt_modified")
-    private Date gmtModified;
+    private LocalDateTime gmtModified;
 
     /**
      * 更新人

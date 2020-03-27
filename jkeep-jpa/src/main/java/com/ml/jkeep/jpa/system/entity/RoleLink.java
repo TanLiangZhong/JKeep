@@ -7,7 +7,7 @@ import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Date: 2019/7/9-20:10
@@ -72,7 +72,7 @@ public class RoleLink {
      */
     @CreationTimestamp
     @Column(name = "gmt_created", updatable = false)
-    private Date gmtCreated;
+    private LocalDateTime gmtCreated;
 
     public RoleLink(Long roleId) {
         this.roleId = roleId;

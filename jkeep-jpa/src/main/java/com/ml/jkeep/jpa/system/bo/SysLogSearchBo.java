@@ -2,7 +2,7 @@ package com.ml.jkeep.jpa.system.bo;
 
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * 系统日志搜索 - bo
@@ -21,11 +21,11 @@ public class SysLogSearchBo {
     /**
      * 开始时间
      */
-    private Date beginTime;
+    private LocalDateTime beginTime;
 
     /**
      * 结束时间
      */
-    private Date endTime;
+    private LocalDateTime endTime;
 
 }
